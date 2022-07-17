@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.eljem.myapplication.R
 import com.eljem.myapplication.databinding.ActivityMainBinding
 import com.eljem.myapplication.model.entity.Category
+import com.eljem.myapplication.model.entity.Color
 import com.eljem.myapplication.model.entity.Photo
 import com.eljem.myapplication.vm.PhotoVM
 
@@ -23,8 +24,11 @@ class MainActivity : AppCompatActivity() {
 
         photoVM = PhotoVM()
 
-        val colors = arrayListOf<String>("#ffeb3b", "#a9e977", "#3eb7fe" , "#414697", "#fcb867", "#fe8a4d",
-                                            "#5c5d5f")
+        val colors = arrayListOf<Color>(Color("Yellow","#ffeb3b"),Color("Green", "#a9e977"),
+                                        Color("Blue","#3eb7fe") , Color("Purple","#7a65fe"),
+                                         Color("Brown","#fcb867"),Color("Orange", "#fe8a4d"),
+                                            Color("Gray","#5c5d5f"), Color("Red", "#f3212d")
+                                            )
 
 
         photoVM.getData("wallpapers",8).observe(this, Observer {

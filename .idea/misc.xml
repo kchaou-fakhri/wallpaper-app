@@ -10,9 +10,11 @@
         <entry key="..\:/Users/asus/AndroidStudioProjects/wallpaper/app/src/main/res/drawable/ic_download.xml" value="0.182" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/wallpaper/app/src/main/res/drawable/item_name_bkg.xml" value="0.2305" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/wallpaper/app/src/main/res/layout/activity_display_full_image.xml" value="0.176" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/wallpaper/app/src/main/res/layout/activity_list_of_images.xml" value="0.25" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/wallpaper/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/wallpaper/app/src/main/res/layout/category_item.xml" value="0.25" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/wallpaper/app/src/main/res/layout/color_item.xml" value="0.1" />
+        <entry key="..\:/Users/asus/AndroidStudioProjects/wallpaper/app/src/main/res/layout/grid_item.xml" value="0.25" />
         <entry key="..\:/Users/asus/AndroidStudioProjects/wallpaper/app/src/main/res/layout/recommend_item.xml" value="0.25" />
       </map>
     </option>
