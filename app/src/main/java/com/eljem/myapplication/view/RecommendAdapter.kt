@@ -1,13 +1,13 @@
-package com.eljem.myapplication
+package com.eljem.myapplication.view
 
 import android.content.Context
-import android.graphics.Color
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.eljem.myapplication.R
 import com.eljem.myapplication.model.entity.Photo
 import com.eljem.myapplication.utils.ScaleImageView
 
@@ -18,8 +18,16 @@ class RecommendAdapter(val context: Context, val photos : ArrayList<Photo>) : Re
 
         fun bind(photo: Photo){
             Glide.with(context /* context */)
-                .load(photo.url)
+                .load(photo.url.regular)
                 .into(itemView.findViewById<ScaleImageView>(R.id.image))
+            itemView.setOnClickListener {
+                context.let {
+                    val intent = Intent(it, DisplayFullImageActivity::class.java)
+                    intent.putExtra("photo", photo.url.full);
+                    it.startActivity(intent)
+                }
+            }
+
 
         }
 

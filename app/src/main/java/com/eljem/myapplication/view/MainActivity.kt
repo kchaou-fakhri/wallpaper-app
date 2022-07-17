@@ -1,15 +1,19 @@
-package com.eljem.myapplication
+package com.eljem.myapplication.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.eljem.myapplication.R
 import com.eljem.myapplication.databinding.ActivityMainBinding
 import com.eljem.myapplication.model.entity.Category
 import com.eljem.myapplication.model.entity.Photo
+import com.eljem.myapplication.vm.PhotoVM
 
 class MainActivity : AppCompatActivity() {
     lateinit var binding : ActivityMainBinding
+    lateinit var photoVM : PhotoVM
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,23 +21,40 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+        photoVM = PhotoVM()
+
         val colors = arrayListOf<String>("#ffeb3b", "#a9e977", "#3eb7fe" , "#414697", "#fcb867", "#fe8a4d",
                                             "#5c5d5f")
-        val photos = arrayListOf<Photo>(Photo("https://images.unsplash.com/photo-1493612276216-ee3925520721?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzMDM4MTJ8MHwxfHNlYXJjaHwxfHxyYW5kb218ZW58MHx8fHwxNjU4MDQ5ODgw&ixlib=rb-1.2.1&q=80&w=1080"),
-                                            Photo("https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzMDM4MTJ8MHwxfHNlYXJjaHwyfHxyYW5kb218ZW58MHx8fHwxNjU4MDQ5ODgw&ixlib=rb-1.2.1&q=80&w=1080"),
-                                            Photo("https://images.unsplash.com/photo-1481349518771-20055b2a7b24?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzMDM4MTJ8MHwxfHNlYXJjaHwzfHxyYW5kb218ZW58MHx8fHwxNjU4MDQ5ODgw&ixlib=rb-1.2.1&q=80&w=1080"),
-                                            Photo("https://images.unsplash.com/photo-1509281373149-e957c6296406?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzMDM4MTJ8MHwxfHNlYXJjaHw0fHxyYW5kb218ZW58MHx8fHwxNjU4MDQ5ODgw&ixlib=rb-1.2.1&q=80&w=1080"),
-                                            Photo("https://images.unsplash.com/photo-1508138221679-760a23a2285b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzMDM4MTJ8MHwxfHNlYXJjaHw1fHxyYW5kb218ZW58MHx8fHwxNjU4MDQ5ODgw&ixlib=rb-1.2.1&q=80&w=1080")
+
+
+        photoVM.getData("wallpapers",8).observe(this, Observer {
+            val recommendadapter = RecommendAdapter(this, it as ArrayList<Photo>)
+
+            binding.recommend.layoutManager = LinearLayoutManager(this)
+            binding.recommend.layoutManager = LinearLayoutManager(
+                this,
+                LinearLayoutManager.HORIZONTAL,
+                false
             )
+
+            binding.recommend.adapter = recommendadapter
+        })
+
 
         val categories = arrayListOf<Category>(Category("Abstract", R.drawable.img_abstract),
                                                  Category("Nature", R.drawable.img_nature),
                                                  Category("Food", R.drawable.img_food),
                                                  Category("Travel", R.drawable.img_travel),
                                                  Category("Animals", R.drawable.img_animals),
-                                                Category("Business", R.drawable.img_work),
+                                                 Category("Business", R.drawable.img_work),
+                                                 Category("Space", R.drawable.img_space),
+                                                 Category("Car", R.drawable.img_car),
+                                                 Category("Baby", R.drawable.img_baby),
+                                                    Category("Technology", R.drawable.img_tech),
 
-        )
+
+
+            )
 
 
         val adapter = ColorAdapter(this, colors)
@@ -48,16 +69,7 @@ class MainActivity : AppCompatActivity() {
             binding.colors.adapter = adapter
 
 
-        val recommendadapter = RecommendAdapter(this, photos)
 
-        binding.recommend.layoutManager = LinearLayoutManager(this)
-        binding.recommend.layoutManager = LinearLayoutManager(
-            this,
-            LinearLayoutManager.HORIZONTAL,
-            false
-        )
-
-        binding.recommend.adapter = recommendadapter
 
 
 

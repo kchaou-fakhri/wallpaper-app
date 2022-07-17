@@ -1,15 +1,13 @@
-package com.eljem.myapplication
+package com.eljem.myapplication.view
 
 import android.content.Context
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
+import com.eljem.myapplication.R
 import com.eljem.myapplication.model.entity.Category
-import com.eljem.myapplication.model.entity.Photo
 import com.eljem.myapplication.utils.ScaleImageView
 
 class CategoriesAdapter(val context: Context, val categories: ArrayList<Category>) : RecyclerView.Adapter<CategoriesAdapter.ViewHolder>() {
