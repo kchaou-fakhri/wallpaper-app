@@ -5,4 +5,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class PhotoUrl( @SerializedName("full")  val full: String,
-                     @SerializedName("regular")  val regular: String)
+                     @SerializedName("regular")  val regular: String,
+                        @SerializedName("small")  val small: String)

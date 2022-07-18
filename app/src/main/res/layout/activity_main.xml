@@ -87,7 +87,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_categories"
         tools:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
-        tools:spanCount="3" />
+        tools:spanCount="2" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

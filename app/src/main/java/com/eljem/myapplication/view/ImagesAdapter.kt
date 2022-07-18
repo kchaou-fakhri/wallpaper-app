@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.eljem.myapplication.R
 import com.eljem.myapplication.model.entity.Photo
 import com.eljem.myapplication.utils.ScaleImageView
+import com.squareup.picasso.Picasso
 import kotlin.random.Random
 
 class ImagesAdapter(val context: Context, val photos : ArrayList<Photo>) : RecyclerView.Adapter<ImagesAdapter.ViewHolder>() {
@@ -21,14 +22,17 @@ class ImagesAdapter(val context: Context, val photos : ArrayList<Photo>) : Recyc
         fun bind(photo: Photo){
 
 
-
-            Glide.with(context /* context */)
-                .load(photo.url.regular)
+            Picasso.get().load(photo.url.small)
                 .into(itemView.findViewById<ScaleImageView>(R.id.image))
+            itemView.layoutParams.height = Random.nextInt(400,750)
+//            Glide.with(context /* context */)
+//                .load(photo.url.small)
+//                .into(itemView.findViewById<ScaleImageView>(R.id.image))
             itemView.setOnClickListener {
                 context.let {
                     val intent = Intent(it, DisplayFullImageActivity::class.java)
                     intent.putExtra("photo", photo.url.full);
+
                     it.startActivity(intent)
                 }
             }
