@@ -3,7 +3,7 @@
     android:layout_width="50dp"
     android:layout_height="50dp"
     android:background="@color/white"
-    android:layout_marginLeft="20dp"
+    android:layout_marginLeft="10dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
   >
 
@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
 
 
-        app:cardCornerRadius="13dp"
+        app:cardCornerRadius="100dp"
         app:layout_constraintStart_toStartOf="parent" >
         <TextView
             android:id="@+id/color"

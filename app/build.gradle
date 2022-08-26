@@ -55,4 +55,6 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.3")
     implementation("com.squareup.okhttp3:logging-interceptor:4.9.3")
     implementation 'com.squareup.picasso:picasso:2.8'
+    //circle image
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
 }

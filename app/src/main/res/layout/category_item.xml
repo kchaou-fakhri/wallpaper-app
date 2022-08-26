@@ -8,7 +8,7 @@
     android:elevation="2dp"
 
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="10dp">
+    app:cardCornerRadius="5dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

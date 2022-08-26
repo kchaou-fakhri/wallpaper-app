@@ -24,14 +24,18 @@ class MainActivity : AppCompatActivity() {
 
         photoVM = PhotoVM()
 
-        val colors = arrayListOf<Color>(Color("Yellow","#ffeb3b"),Color("Green", "#a9e977"),
+        val colors = arrayListOf<Color>(Color("Yellow","#F9A828"),
+                                         Color("Gray","#ECECEB"),
+                                            Color("Navy", "#07617D"),
+                                                Color("Black","#2E383F"),
+                                            Color("Green", "#349E67"),
                                         Color("Blue","#3eb7fe") , Color("Purple","#7a65fe"),
                                          Color("Brown","#fcb867"),Color("Orange", "#fe8a4d"),
-                                            Color("Gray","#5c5d5f"), Color("Red", "#f3212d")
+                                             Color("Red", "#f3212d")
                                             )
 
 
-        photoVM.getRandomImages(15).observe(this, Observer {
+        photoVM.getData("popular",20).observe(this, Observer {
             val recommendadapter = RecommendAdapter(this, it as ArrayList<Photo>)
 
             binding.recommend.layoutManager = LinearLayoutManager(this)
