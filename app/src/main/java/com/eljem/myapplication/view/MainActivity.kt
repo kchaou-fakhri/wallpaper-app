@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
                                             )
 
 
-        photoVM.getData("cute",20).observe(this, Observer {
+        photoVM.getRandomImages().observe(this, Observer {
             val recommendadapter = RecommendAdapter(this, it as ArrayList<Photo>)
 
             binding.recommend.layoutManager = LinearLayoutManager(this)

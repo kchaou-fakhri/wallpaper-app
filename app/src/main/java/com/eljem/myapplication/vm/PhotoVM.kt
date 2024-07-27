@@ -17,7 +17,7 @@ class PhotoVM : ViewModel() {
         return unsplashRepository.getData(search, page)
     }
 
-    fun getRandomImages(count: Int): LiveData<List<Photo>> {
-        return unsplashRepository.getRandom(count)
+    fun getRandomImages(): LiveData<List<Photo>> {
+        return unsplashRepository.getRandom()
     }
 }
