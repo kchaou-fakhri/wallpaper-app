@@ -20,9 +20,9 @@ interface UnsplachService {
         @Query("orientation") orientation : String
     ) :  Call<UnsplashResponse>
 
-    @GET("photos/random")
+    @GET("photos")
     fun getRandom(
-        @Query("count") count: Int,
+
 
     ) :  Call<List<Photo>>
 }

@@ -50,11 +50,11 @@ class UnsplashRepository {
     }
 
 
-    fun getRandom(count: Int) : LiveData<List<Photo>>{
+    fun getRandom() : LiveData<List<Photo>>{
         var sort : String = "popular"
         var mutableLiveData = MutableLiveData<List<Photo>> ()
 
-        val getPost = Retrofit.api.getRandom(count)
+        val getPost = Retrofit.api.getRandom()
 
         getPost?.clone()?.enqueue(object :  Callback<List<Photo>> {
 

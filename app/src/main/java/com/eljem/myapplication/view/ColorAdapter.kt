@@ -6,7 +6,7 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.eljem.myapplication.R
 
@@ -16,12 +16,12 @@ class ColorAdapter(val context: Context, val colors: ArrayList<com.eljem.myappli
 
 
         fun bind(color : com.eljem.myapplication.model.entity.Color){
-            itemView.findViewById<TextView>(R.id.color).setBackgroundColor(Color.parseColor(color.value))
+            itemView.findViewById<CardView>(R.id.colors).setCardBackgroundColor(Color.parseColor(color.value))
 
             itemView.setOnClickListener {
                 context.let {
                     val intent = Intent(it, ListOfImagesActivity::class.java)
-                    intent.putExtra("category", color.name.lowercase());
+                    intent.putExtra("category", color.name.lowercase())
                     it.startActivity(intent)
                 }
             }
