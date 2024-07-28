@@ -1,11 +1,14 @@
-package com.eljem.myapplication.view
+package com.eljem.myapplication.view.home
 
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.view.Window
+import android.view.WindowManager
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -16,16 +19,29 @@ class SplashScreenActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash_screen)
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_MEDIA_IMAGES)
-            != PackageManager.PERMISSION_GRANTED
-        ) {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            // SDK >= 33
+            checkAndRequestPermission(Manifest.permission.READ_MEDIA_IMAGES)
+        } else  {
+            // SDK > 32 and < 33
+            checkAndRequestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        }
+
+
+    }
+
+    private fun checkAndRequestPermission(permission: String) {
+        if (ContextCompat.checkSelfPermission(this, permission)
+            != PackageManager.PERMISSION_GRANTED) {
             // Permission is not granted
-            requestPermission()
+            requestPermission(permission)
         } else {
-            // Permission has already been granted
-            // Continue with the app functionality
             Handler().postDelayed(Runnable {
 
 
@@ -34,26 +50,17 @@ class SplashScreenActivity : AppCompatActivity() {
 
             }, 2000)
         }
-
-
     }
 
-
-    private fun requestPermission() {
-        if (ActivityCompat.shouldShowRequestPermissionRationale(
-                this,
-                Manifest.permission.READ_MEDIA_IMAGES
-            )
-        ) {
+    private fun requestPermission(permission: String) {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this, permission)) {
             // Show an explanation to the user why your app needs the permission
             AlertDialog.Builder(this)
                 .setTitle("Permission needed")
-                .setMessage("This permission is needed to access media files")
+                .setMessage("This permission is needed for the app to function properly")
                 .setPositiveButton("OK") { dialog, _ ->
-                    ActivityCompat.requestPermissions(
-                        this,
-                        arrayOf(Manifest.permission.READ_MEDIA_IMAGES), PERMISSION_REQUEST_CODE
-                    )
+                    ActivityCompat.requestPermissions(this,
+                        arrayOf(permission), PERMISSION_REQUEST_CODE)
                     dialog.dismiss()
                 }
                 .setNegativeButton("Cancel") { dialog, _ ->
@@ -64,25 +71,20 @@ class SplashScreenActivity : AppCompatActivity() {
                 .show()
         } else {
             // No explanation needed, we can request the permission
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(Manifest.permission.READ_MEDIA_IMAGES), PERMISSION_REQUEST_CODE
-            )
+            ActivityCompat.requestPermissions(this,
+                arrayOf(permission), PERMISSION_REQUEST_CODE)
         }
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<String>,
-        grantResults: IntArray
-    ) {
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         when (requestCode) {
             PERMISSION_REQUEST_CODE -> {
                 // If request is cancelled, the result arrays are empty.
                 if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                    // Permission was granted, yay! Do the task you need to do.
+                    // Permission was granted, yay!
                     navigateToHome()
+
                 } else {
                     // Permission denied, boo! Close the app.
                     closeApp()

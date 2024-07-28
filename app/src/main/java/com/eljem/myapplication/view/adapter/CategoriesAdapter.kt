@@ -1,4 +1,4 @@
-package com.eljem.myapplication.view
+package com.eljem.myapplication.view.adapter
 
 import android.content.Context
 import android.content.Intent
@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.eljem.myapplication.R
 import com.eljem.myapplication.model.entity.Category
 import com.eljem.myapplication.utils.ScaleImageView
+import com.eljem.myapplication.view.image.ListOfImagesActivity
 
 class CategoriesAdapter(val context: Context, val categories: ArrayList<Category>) : RecyclerView.Adapter<CategoriesAdapter.ViewHolder>() {
 

@@ -21,9 +21,20 @@ android {
         buildConfigField("String", "BASE_API_URL", localProperties['baseApiUrl'])
     }
 
+    signingConfigs {
+
+        release {
+
+            storeFile file('./release-keystore.jks')
+            storePassword "welp2024"
+            keyAlias "welpapp"
+            keyPassword "welp2024"
+        }
+    }
+
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -56,4 +67,5 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.8'
     //circle image
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+
 }

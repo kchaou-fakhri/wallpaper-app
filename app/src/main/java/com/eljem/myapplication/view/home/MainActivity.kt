@@ -1,4 +1,4 @@
-package com.eljem.myapplication.view
+package com.eljem.myapplication.view.home
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,6 +10,9 @@ import com.eljem.myapplication.databinding.ActivityMainBinding
 import com.eljem.myapplication.model.entity.Category
 import com.eljem.myapplication.model.entity.Color
 import com.eljem.myapplication.model.entity.Photo
+import com.eljem.myapplication.view.adapter.CategoriesAdapter
+import com.eljem.myapplication.view.adapter.ColorAdapter
+import com.eljem.myapplication.view.adapter.RecommendAdapter
 import com.eljem.myapplication.vm.PhotoVM
 
 class MainActivity : AppCompatActivity() {

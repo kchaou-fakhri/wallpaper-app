@@ -1,11 +1,10 @@
-package com.eljem.myapplication.view
+package com.eljem.myapplication.view.image
 
 
 import android.Manifest
 import android.app.WallpaperManager
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
 import android.os.Environment
@@ -20,7 +19,6 @@ import com.eljem.myapplication.databinding.ActivityDisplayFullImageBinding
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import java.io.*
-import java.net.URL
 
 
 class DisplayFullImageActivity : AppCompatActivity() {

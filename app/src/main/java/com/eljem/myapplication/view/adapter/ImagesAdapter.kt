@@ -1,16 +1,15 @@
-package com.eljem.myapplication.view
+package com.eljem.myapplication.view.adapter
 
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.eljem.myapplication.R
 import com.eljem.myapplication.model.entity.Photo
 import com.eljem.myapplication.utils.ScaleImageView
+import com.eljem.myapplication.view.image.DisplayFullImageActivity
 import com.squareup.picasso.Picasso
 import kotlin.random.Random
 
@@ -31,7 +30,9 @@ class ImagesAdapter(val context: Context, val photos : ArrayList<Photo>) : Recyc
             itemView.setOnClickListener {
                 context.let {
                     val intent = Intent(it, DisplayFullImageActivity::class.java)
-                    intent.putExtra("photo", photo.url.full);
+                    if (!photo.url.full.isNullOrEmpty()){
+                        intent.putExtra("photo", photo.url.full)
+                    }
 
                     it.startActivity(intent)
                 }

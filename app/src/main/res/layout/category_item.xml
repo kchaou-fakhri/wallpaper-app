@@ -20,7 +20,6 @@
 
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/img_test"
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="16dp" />
 
@@ -34,7 +33,7 @@
             android:gravity="center"
             android:textColor="#FFFFFF"
             android:fontFamily="@font/roboto_regular"
-            android:textSize="20sp"
+            android:textSize="25sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/image"
             app:layout_constraintStart_toStartOf="@+id/image"
