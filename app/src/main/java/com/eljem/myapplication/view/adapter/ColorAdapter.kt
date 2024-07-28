@@ -1,4 +1,4 @@
-package com.eljem.myapplication.view
+package com.eljem.myapplication.view.adapter
 
 import android.content.Context
 import android.content.Intent
@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.eljem.myapplication.R
+import com.eljem.myapplication.view.image.ListOfImagesActivity
 
 class ColorAdapter(val context: Context, val colors: ArrayList<com.eljem.myapplication.model.entity.Color>) : RecyclerView.Adapter<ColorAdapter.ViewHolder>() {
 

@@ -14,11 +14,11 @@ import retrofit2.Response
 class UnsplashRepository {
 
 
-  fun getData(search: String, page: Int) : LiveData<List<Photo>>{
+  fun getData(search: String, per_page: Int, page: Int) : LiveData<List<Photo>>{
      var sort : String = "popular"
       var mutableLiveData = MutableLiveData<List<Photo>> ()
 
-      val getPost = Retrofit.api.getAllData(1,page,sort,search, "portrait")
+      val getPost = Retrofit.api.getAllData(page,per_page,sort,search, "portrait")
 
         getPost?.clone()?.enqueue(object :  Callback<UnsplashResponse> {
 

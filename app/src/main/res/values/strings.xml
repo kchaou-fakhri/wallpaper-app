@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Welp</string>
+    <string name="copyright">Copyright © 2024</string>
+    <string name="splash_description">Wellp is a mobile application allows user \nto use and display a magic wallpaper</string>
 </resources>

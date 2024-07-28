@@ -10,12 +10,12 @@
               <deviceKey>
                 <Key>
                   <type value="VIRTUAL_DEVICE_PATH" />
-                  <value value="C:\Users\asus\.android\avd\Pixel_4_API_33.avd" />
+                  <value value="C:\Users\asus\.android\avd\Infinix_Note_30.avd" />
                 </Key>
               </deviceKey>
             </Target>
           </targetSelectedWithDropDown>
-          <timeTargetWasSelectedWithDropDown value="2024-07-27T16:54:18.593271500Z" />
+          <timeTargetWasSelectedWithDropDown value="2024-07-28T12:31:06.667253500Z" />
         </State>
       </entry>
     </value>
