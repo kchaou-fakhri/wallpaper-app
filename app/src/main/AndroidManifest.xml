@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.eljem.myapplication">
+    package="com.dev0ko.ewelp">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
@@ -24,11 +24,11 @@
 
 
         <activity
-            android:name=".view.home.MainActivity"
+            android:name="com.dev0ko.ewelp.view.home.MainActivity"
             android:exported="true" />
 
         <activity
-            android:name=".view.home.SplashScreenActivity"
+            android:name="com.dev0ko.ewelp.view.home.SplashScreenActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,10 +37,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.image.ListOfImagesActivity"
+            android:name="com.dev0ko.ewelp.view.image.ListOfImagesActivity"
             android:exported="false" />
         <activity
-            android:name=".view.image.DisplayFullImageActivity"
+            android:name="com.dev0ko.ewelp.view.image.DisplayFullImageActivity"
             android:exported="false" />
 
         <uses-library android:name="android.test.runner"

@@ -15,7 +15,7 @@
         android:layout_height="match_parent"
       >
 
-        <com.eljem.myapplication.utils.ScaleImageView
+        <com.dev0ko.ewelp.utils.ScaleImageView
             android:id="@+id/image"
 
             android:layout_width="match_parent"
