@@ -2,6 +2,7 @@ package com.dev0ko.ewelp.presentation.ui.image
 
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import androidx.activity.viewModels

@@ -2,17 +2,17 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/main_activity"
     android:background="@color/white"
     tools:context=".presentation.ui.home.MainActivity">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/constraint_main">
+        android:layout_height="match_parent">
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -75,7 +75,7 @@
 
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/search_field"
             android:layout_width="match_parent"
             android:layout_height="35dp"
             android:layout_marginStart="24dp"
@@ -85,6 +85,8 @@
             android:drawableLeft="@drawable/ic_round_search"
             android:drawablePadding="10dp"
             android:hint="Find wallpaper..."
+            android:imeOptions="actionSearch"
+            android:inputType="text"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:textSize="15sp"
@@ -98,24 +100,24 @@
             android:layout_height="wrap_content"
 
             android:layout_marginTop="16dp"
+            android:fontFamily="@font/roboto_regular"
             android:text="Recommend"
             android:textColor="#272b2c"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:fontFamily="@font/roboto_regular"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.056"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editText" />
+            app:layout_constraintTop_toBottomOf="@+id/search_field" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recommend"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_recommend" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recommend"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_recommend" />
 
         <TextView
             android:id="@+id/txt_categories"
@@ -123,41 +125,41 @@
             android:layout_height="wrap_content"
 
             android:layout_marginTop="16dp"
+            android:fontFamily="@font/roboto_regular"
             android:text="Categories"
             android:textColor="#272b2c"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:fontFamily="@font/roboto_regular"
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.056"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/colors" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/categories"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/categories"
 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="#FFFFFF"
-        android:nestedScrollingEnabled="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_categories"
-        tools:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
-        tools:spanCount="2" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="#FFFFFF"
+            android:nestedScrollingEnabled="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_categories"
+            tools:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+            tools:spanCount="2" />
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="The color tone"
+            android:fontFamily="@font/roboto_regular"
 
+            android:text="The color tone"
             android:textColor="#272b2c"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:fontFamily="@font/roboto_regular"
 
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -170,15 +172,13 @@
             android:id="@+id/colors"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:background="@color/white"
             android:layout_marginTop="20dp"
+            android:background="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
 
 </ScrollView>
