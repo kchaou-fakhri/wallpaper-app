@@ -57,9 +57,8 @@ class MainActivity : AppCompatActivity() {
             binding.recommend.adapter = recommendadapter
         })
         binding.searchField.setOnEditorActionListener { v, actionId, event ->
-            if (actionId == EditorInfo.IME_ACTION_SEND) {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 val searchText = binding.searchField.text.toString()
-                Log.println(Log.ASSERT, "searched value", searchText)
                 this.let {
                     val intent = Intent(it, ListOfImagesActivity::class.java)
                     intent.putExtra("category", searchText.lowercase())

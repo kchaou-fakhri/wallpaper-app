@@ -73,7 +73,6 @@ class ListOfImagesActivity : AppCompatActivity() {
                 or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION)
     }
     private fun getData(category: String?, page: Int) {
-        Log.println(Log.ASSERT,"category",category.toString())
         photoVM.getData(category!!, 30, page).observe(this, Observer {
             images.addAll(it)
             imagesAdapter.notifyDataSetChanged()

@@ -85,7 +85,7 @@
             android:drawableLeft="@drawable/ic_round_search"
             android:drawablePadding="10dp"
             android:hint="Find wallpaper..."
-            android:imeOptions="actionSend"
+            android:imeOptions="actionSearch"
             android:inputType="text"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
