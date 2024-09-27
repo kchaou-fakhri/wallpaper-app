@@ -13,7 +13,7 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import com.dev0ko.ewelp.R
-import com.dev0ko.ewelp.view.home.MainActivity
+import com.dev0ko.ewelp.presentation.ui.home.MainActivity
 import org.hamcrest.Description
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers.`is`

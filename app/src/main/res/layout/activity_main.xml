@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/main_activity"
     android:background="@color/white"
-    tools:context=".view.home.MainActivity">
+    tools:context=".presentation.ui.home.MainActivity">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
