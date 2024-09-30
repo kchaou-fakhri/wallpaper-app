@@ -1,6 +1,6 @@
 package com.dev0ko.ewelp
 
-import com.dev0ko.ewelp.model.entity.Wallet
+import com.dev0ko.ewelp.data.entity.Wallet
 import org.junit.Test
 
 import org.junit.Assert.*

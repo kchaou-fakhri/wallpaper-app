@@ -20,15 +20,16 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
+        android:name=".WelpApplication"
         tools:targetApi="31">
 
 
         <activity
-            android:name="com.dev0ko.ewelp.view.home.MainActivity"
+            android:name="com.dev0ko.ewelp.presentation.ui.home.MainActivity"
             android:exported="true" />
 
         <activity
-            android:name="com.dev0ko.ewelp.view.home.SplashScreenActivity"
+            android:name="com.dev0ko.ewelp.presentation.ui.home.SplashScreenActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,10 +38,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.dev0ko.ewelp.view.image.ListOfImagesActivity"
+            android:name="com.dev0ko.ewelp.presentation.ui.image.ListOfImagesActivity"
             android:exported="false" />
         <activity
-            android:name="com.dev0ko.ewelp.view.image.DisplayFullImageActivity"
+            android:name="com.dev0ko.ewelp.presentation.ui.image.DisplayFullImageActivity"
             android:exported="false" />
 
         <uses-library android:name="android.test.runner"
