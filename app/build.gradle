@@ -33,7 +33,7 @@ android {
 
             storeFile file('./release-keystore.jks')
             storePassword "welp2024"
-            keyAlias "welpapp"
+            keyAlias "welp"
             keyPassword "welp2024"
         }
     }
@@ -43,6 +43,7 @@ android {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
     compileOptions {

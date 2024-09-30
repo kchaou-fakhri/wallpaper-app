@@ -1,6 +1,8 @@
 package com.dev0ko.ewelp.presentation.ui.home
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.inputmethod.EditorInfo
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -11,6 +13,7 @@ import com.dev0ko.ewelp.databinding.ActivityMainBinding
 import com.dev0ko.ewelp.presentation.ui.adapter.CategoriesAdapter
 import com.dev0ko.ewelp.presentation.ui.adapter.ColorAdapter
 import com.dev0ko.ewelp.presentation.ui.adapter.RecommendedAdapter
+import com.dev0ko.ewelp.presentation.ui.image.ListOfImagesActivity
 import com.dev0ko.ewelp.presentation.viewmodel.PhotoViewModel
 import com.dev0ko.ewelp.utils.Constants
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,6 +31,19 @@ class MainActivity : AppCompatActivity() {
 
 
 
+        binding.searchField.setOnEditorActionListener { v, actionId, event ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                val searchText = binding.searchField.text.toString()
+                this.let {
+                    val intent = Intent(it, ListOfImagesActivity::class.java)
+                    intent.putExtra(Constants.CATEGORY, searchText.lowercase())
+                    it.startActivity(intent)
+                }
+                true
+            } else {
+                false
+            }
+        }
 
 
         photoVM.getRandomImages().observe(this, Observer {
