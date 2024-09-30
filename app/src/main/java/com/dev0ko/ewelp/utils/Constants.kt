@@ -15,7 +15,13 @@ object Constants {
         Color("Purple", "#7a65fe"),
         Color("Brown", "#fcb867"),
         Color("Orange", "#fe8a4d"),
-        Color("Red", "#f3212d")
+        Color("Red", "#f3212d"),
+        Color("Pink", "#FF6F91"),
+        Color("Teal", "#009688"),
+        Color("Cyan", "#00BCD4"),
+        Color("Lime", "#CDDC39"),
+        Color("Indigo", "#3F51B5"),
+        Color("Magenta", "#D5006D")
     )
 
     val CATEGORIES = arrayListOf<Category>(
