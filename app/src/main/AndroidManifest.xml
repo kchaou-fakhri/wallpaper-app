@@ -26,6 +26,7 @@
 
         <activity
             android:name="com.dev0ko.ewelp.presentation.ui.home.MainActivity"
+            android:windowSoftInputMode="stateHidden"
             android:exported="true" />
 
         <activity
