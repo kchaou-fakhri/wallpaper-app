@@ -8,8 +8,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.dev0ko.ewelp.R
 import com.dev0ko.ewelp.data.entity.Photo
-import com.dev0ko.ewelp.utils.ScaleImageView
 import com.dev0ko.ewelp.presentation.ui.image.DisplayFullImageActivity
+import com.dev0ko.ewelp.utils.Constants
+import com.dev0ko.ewelp.utils.ScaleImageView
 import com.squareup.picasso.Picasso
 import kotlin.random.Random
 
@@ -24,14 +25,11 @@ class ImagesAdapter(val context: Context, val photos : ArrayList<Photo>) : Recyc
             Picasso.get().load(photo.url.small)
                 .into(itemView.findViewById<ScaleImageView>(R.id.image))
             itemView.layoutParams.height = Random.nextInt(400,750)
-//            Glide.with(context /* context */)
-//                .load(photo.url.small)
-//                .into(itemView.findViewById<ScaleImageView>(R.id.image))
             itemView.setOnClickListener {
                 context.let {
                     val intent = Intent(it, DisplayFullImageActivity::class.java)
                     if (!photo.url.full.isNullOrEmpty()){
-                        intent.putExtra("photo", photo.url.full)
+                        intent.putExtra(Constants.PHOTO, photo.url.full)
                     }
 
                     it.startActivity(intent)

@@ -29,11 +29,19 @@ object Constants {
         Category("Car", R.drawable.img_car),
         Category("Baby", R.drawable.img_baby),
         Category("Technology", R.drawable.img_tech),
+    )
 
-
-        )
-
-    val AUTHORIZATION = "Authorization"
-
-    val CLIENT_ID = "Client-ID "
+    const val AUTHORIZATION = "Authorization"
+    const val CLIENT_ID = "Client-ID "
+    const val PHOTO = "photo"
+    const val JPEG = ".jpg"
+    const val CATEGORY = "category"
+    const val PERMISSION_NEEDED = "Permission needed"
+    const val PERMISSION_NEEDED_MESSAGE =
+        "This permission is needed for the app to function properly"
+    const val OK_TEXT = "OK"
+    const val CANCEL = "Cancel"
+    const val POPULAR = "popular"
+    const val PORTRAIT = "portrait"
+    const val LANDSCAPE = "landscape"
 }

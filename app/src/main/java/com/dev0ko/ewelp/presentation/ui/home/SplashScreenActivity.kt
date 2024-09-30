@@ -4,17 +4,17 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.Window
 import android.view.WindowManager
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.dev0ko.ewelp.R
+import com.dev0ko.ewelp.utils.Constants
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.HiltAndroidApp
 
 @AndroidEntryPoint
 class SplashScreenActivity : AppCompatActivity() {
@@ -59,14 +59,16 @@ class SplashScreenActivity : AppCompatActivity() {
         if (ActivityCompat.shouldShowRequestPermissionRationale(this, permission)) {
             // Show an explanation to the user why your app needs the permission
             AlertDialog.Builder(this)
-                .setTitle("Permission needed")
-                .setMessage("This permission is needed for the app to function properly")
-                .setPositiveButton("OK") { dialog, _ ->
-                    ActivityCompat.requestPermissions(this,
-                        arrayOf(permission), PERMISSION_REQUEST_CODE)
+                .setTitle(Constants.PERMISSION_NEEDED)
+                .setMessage(Constants.PERMISSION_NEEDED_MESSAGE)
+                .setPositiveButton(Constants.OK_TEXT) { dialog, _ ->
+                    ActivityCompat.requestPermissions(
+                        this,
+                        arrayOf(permission), PERMISSION_REQUEST_CODE
+                    )
                     dialog.dismiss()
                 }
-                .setNegativeButton("Cancel") { dialog, _ ->
+                .setNegativeButton(Constants.CANCEL) { dialog, _ ->
                     dialog.dismiss()
                     closeApp()
                 }

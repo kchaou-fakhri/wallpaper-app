@@ -1,4 +1,4 @@
-package com.dev0ko.ewelp.presentation.vm
+package com.dev0ko.ewelp.presentation.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
@@ -8,10 +8,10 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class PhotoVM @Inject constructor(private val unsplashRepository : UnsplashRepository): ViewModel()  {
+class PhotoViewModel @Inject constructor(private val unsplashRepository : UnsplashRepository): ViewModel()  {
 
-    fun getData(search: String, per_page: Int, page: Int): LiveData<List<Photo>> {
-        return unsplashRepository.getData(search,per_page, page)
+    fun getData(search: String, perPage: Int, page: Int,  orientation : String): LiveData<List<Photo>> {
+        return unsplashRepository.getData(search,perPage, page, orientation )
     }
 
     fun getRandomImages(): LiveData<List<Photo>> {

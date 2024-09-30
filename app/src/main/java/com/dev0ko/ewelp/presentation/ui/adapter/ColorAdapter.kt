@@ -10,6 +10,7 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.dev0ko.ewelp.R
 import com.dev0ko.ewelp.presentation.ui.image.ListOfImagesActivity
+import com.dev0ko.ewelp.utils.Constants
 
 class ColorAdapter(val context: Context, val colors: ArrayList<com.dev0ko.ewelp.data.entity.Color>) : RecyclerView.Adapter<ColorAdapter.ViewHolder>() {
 
@@ -22,7 +23,7 @@ class ColorAdapter(val context: Context, val colors: ArrayList<com.dev0ko.ewelp.
             itemView.setOnClickListener {
                 context.let {
                     val intent = Intent(it, ListOfImagesActivity::class.java)
-                    intent.putExtra("category", color.name.lowercase())
+                    intent.putExtra(Constants.CATEGORY, color.name.lowercase())
                     it.startActivity(intent)
                 }
             }
@@ -36,7 +37,7 @@ class ColorAdapter(val context: Context, val colors: ArrayList<com.dev0ko.ewelp.
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(colors.get(position))
+        holder.bind(colors[position])
     }
 
     override fun getItemCount(): Int {

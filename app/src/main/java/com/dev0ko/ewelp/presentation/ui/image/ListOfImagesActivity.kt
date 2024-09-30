@@ -2,7 +2,6 @@ package com.dev0ko.ewelp.presentation.ui.image
 
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import androidx.activity.viewModels
@@ -13,14 +12,16 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.dev0ko.ewelp.data.entity.Photo
 import com.dev0ko.ewelp.databinding.ActivityListOfImagesBinding
 import com.dev0ko.ewelp.presentation.ui.adapter.ImagesAdapter
-import com.dev0ko.ewelp.presentation.vm.PhotoVM
+import com.dev0ko.ewelp.presentation.viewmodel.PhotoViewModel
+import com.dev0ko.ewelp.utils.Constants
+import com.dev0ko.ewelp.utils.checkOrientation
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 
 class ListOfImagesActivity : AppCompatActivity() {
     private lateinit var binding: ActivityListOfImagesBinding
-    private val photoVM: PhotoVM by viewModels()
+    private val photoVM: PhotoViewModel by viewModels()
     private lateinit var imagesAdapter: ImagesAdapter
     private var images: ArrayList<Photo> = arrayListOf()
     var page = 1
@@ -30,7 +31,7 @@ class ListOfImagesActivity : AppCompatActivity() {
         binding = ActivityListOfImagesBinding.inflate(layoutInflater)
         val view = binding.root
 
-        hideSystemUI();
+        hideSystemUI()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             window.attributes.layoutInDisplayCutoutMode =
                 WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
@@ -38,7 +39,7 @@ class ListOfImagesActivity : AppCompatActivity() {
         setContentView(view)
 
 
-        val category = intent.extras?.getString("category")
+        val category = intent.extras?.getString(Constants.CATEGORY)
 
 
         imagesAdapter = ImagesAdapter(this, images)
@@ -75,7 +76,8 @@ class ListOfImagesActivity : AppCompatActivity() {
                 or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION)
     }
     private fun getData(category: String?, page: Int) {
-        photoVM.getData(category!!, 30, page).observe(this, Observer {
+        var orientation = checkOrientation(this)
+        photoVM.getData(category!!, 30, page, orientation).observe(this, Observer {
             images.addAll(it)
             imagesAdapter.notifyDataSetChanged()
         })

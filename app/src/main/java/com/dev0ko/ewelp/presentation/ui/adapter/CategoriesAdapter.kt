@@ -11,6 +11,7 @@ import com.dev0ko.ewelp.R
 import com.dev0ko.ewelp.data.entity.Category
 import com.dev0ko.ewelp.utils.ScaleImageView
 import com.dev0ko.ewelp.presentation.ui.image.ListOfImagesActivity
+import com.dev0ko.ewelp.utils.Constants
 
 class CategoriesAdapter(val context: Context, val categories: ArrayList<Category>) : RecyclerView.Adapter<CategoriesAdapter.ViewHolder>() {
 
@@ -24,7 +25,7 @@ class CategoriesAdapter(val context: Context, val categories: ArrayList<Category
             itemView.setOnClickListener {
                 context.let {
                     val intent = Intent(it, ListOfImagesActivity::class.java)
-                    intent.putExtra("category", category.name.lowercase());
+                    intent.putExtra(Constants.CATEGORY, category.name.lowercase());
                     it.startActivity(intent)
                 }
             }
@@ -37,7 +38,7 @@ class CategoriesAdapter(val context: Context, val categories: ArrayList<Category
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(categories.get(position))
+        holder.bind(categories[position])
     }
 
     override fun getItemCount(): Int {

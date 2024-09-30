@@ -1,6 +1,7 @@
 package com.dev0ko.ewelp.presentation.ui.home
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -10,15 +11,14 @@ import com.dev0ko.ewelp.databinding.ActivityMainBinding
 import com.dev0ko.ewelp.presentation.ui.adapter.CategoriesAdapter
 import com.dev0ko.ewelp.presentation.ui.adapter.ColorAdapter
 import com.dev0ko.ewelp.presentation.ui.adapter.RecommendedAdapter
-import com.dev0ko.ewelp.presentation.vm.PhotoVM
+import com.dev0ko.ewelp.presentation.viewmodel.PhotoViewModel
 import com.dev0ko.ewelp.utils.Constants
-import androidx.activity.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private val photoVM: PhotoVM by viewModels()
+    private val photoVM: PhotoViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

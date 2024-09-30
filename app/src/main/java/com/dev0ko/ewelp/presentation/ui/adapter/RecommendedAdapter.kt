@@ -9,8 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.dev0ko.ewelp.R
 import com.dev0ko.ewelp.data.entity.Photo
-import com.dev0ko.ewelp.utils.ScaleImageView
 import com.dev0ko.ewelp.presentation.ui.image.DisplayFullImageActivity
+import com.dev0ko.ewelp.utils.Constants
+import com.dev0ko.ewelp.utils.ScaleImageView
 
 class RecommendedAdapter(val context: Context, val photos : ArrayList<Photo>) : RecyclerView.Adapter<RecommendedAdapter.ViewHolder>() {
 
@@ -18,13 +19,13 @@ class RecommendedAdapter(val context: Context, val photos : ArrayList<Photo>) : 
 
 
         fun bind(photo: Photo){
-            Glide.with(context /* context */)
+            Glide.with(context)
                 .load(photo.url.regular)
                 .into(itemView.findViewById<ScaleImageView>(R.id.image))
             itemView.setOnClickListener {
                 context.let {
                     val intent = Intent(it, DisplayFullImageActivity::class.java)
-                    intent.putExtra("photo", photo.url.full);
+                    intent.putExtra(Constants.PHOTO, photo.url.full);
                     it.startActivity(intent)
                 }
             }

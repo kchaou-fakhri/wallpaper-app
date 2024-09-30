@@ -16,15 +16,19 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.dev0ko.ewelp.R
 import com.dev0ko.ewelp.databinding.ActivityDisplayFullImageBinding
+import com.dev0ko.ewelp.utils.Constants
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
-import java.io.*
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
+import java.io.OutputStream
 
 @AndroidEntryPoint
 class DisplayFullImageActivity : AppCompatActivity() {
-    lateinit var binding : ActivityDisplayFullImageBinding
-    lateinit var wallpaperManager : WallpaperManager
+    private lateinit var binding: ActivityDisplayFullImageBinding
+    private lateinit var wallpaperManager: WallpaperManager
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,13 +38,13 @@ class DisplayFullImageActivity : AppCompatActivity() {
 
         hideSystemUI();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            getWindow().getAttributes().layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
+            window.attributes.layoutInDisplayCutoutMode =
+                WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
         }
         setContentView(view)
 
 
-
-        val photoUrl = intent.extras!!.getString("photo")
+        val photoUrl = intent.extras!!.getString(Constants.PHOTO)
         wallpaperManager = WallpaperManager.getInstance(this);
 
 
@@ -56,10 +60,8 @@ class DisplayFullImageActivity : AppCompatActivity() {
 
 
         binding.btnApply.setOnClickListener {
-            Log.println(Log.ASSERT, "-----------", "yemch")
             setWallpaper(photoUrl!!)
             it.setBackgroundResource(R.drawable.bkg_cercil_blue)
-
 
         }
 
@@ -68,7 +70,7 @@ class DisplayFullImageActivity : AppCompatActivity() {
         binding.btnSave.setOnClickListener {
             isStoragePermissionGranted()
             val image = doInBackground(photoUrl!!)
-            saveImageToDownloadFolder(getRandomString(20)+".jpg", image!!)
+            saveImageToDownloadFolder(getRandomString(20) + Constants.JPEG, image!!)
             it.setBackgroundResource(R.drawable.bkg_cercil_blue)
 
         }

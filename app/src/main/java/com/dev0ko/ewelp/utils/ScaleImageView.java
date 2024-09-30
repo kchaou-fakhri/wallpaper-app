@@ -91,7 +91,7 @@ public class ScaleImageView extends androidx.appcompat.widget.AppCompatImageView
                 int heightC = width*ih/iw;
                 if(height > 0)
                     if(heightC>height){
-                        // dont let hegiht be greater then set max
+                        // don't let height be greater then set max
                         heightC = height;
                         width = heightC*iw/ih;
                     }
