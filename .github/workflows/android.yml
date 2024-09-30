@@ -24,7 +24,7 @@ jobs:
     - name: Grant execute permissions to gradlew
       run: chmod +x gradlew
 
-    - name: Build debug APK
+    - name: Build Release APK
       run: ./gradlew assembleRelease --stacktrace
 
     - name: List APK files
