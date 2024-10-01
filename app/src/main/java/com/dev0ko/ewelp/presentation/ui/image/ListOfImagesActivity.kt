@@ -6,9 +6,13 @@ import android.view.View
 import android.view.WindowManager
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.dev0ko.authlib.presentation.view.LoginScreen
 import com.dev0ko.ewelp.data.entity.Photo
 import com.dev0ko.ewelp.databinding.ActivityListOfImagesBinding
 import com.dev0ko.ewelp.presentation.ui.adapter.ImagesAdapter
@@ -20,34 +24,51 @@ import dagger.hilt.android.AndroidEntryPoint
 // Entry point for dependency injection using Hilt
 @AndroidEntryPoint
 class ListOfImagesActivity : AppCompatActivity() {
-    // View binding for the activity
     private lateinit var binding: ActivityListOfImagesBinding
-    // ViewModel to manage photo data
     private val photoVM: PhotoViewModel by viewModels()
-    // Adapter for displaying images in a RecyclerView
     private lateinit var imagesAdapter: ImagesAdapter
-    // List to hold images
     private var images: ArrayList<Photo> = arrayListOf()
     // Current page for pagination
     var page = 1
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Inflate the layout using View Binding
         binding = ActivityListOfImagesBinding.inflate(layoutInflater)
         val view = binding.root
 
         // Hide system UI for a fullscreen experience
-        hideSystemUI()
-        // Set layout in display cutout mode for devices with a notch
+        // hideSystemUI()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             window.attributes.layoutInDisplayCutoutMode =
                 WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
         }
 
-        // Show the action bar if it's not hidden
-        supportActionBar?.show()
+
+        binding.composeView.setContent {
+            var proMode by remember { mutableStateOf(false) }
+            if (proMode) {
+                LoginScreen(onClickBack = { proMode = !proMode })
+            }
+
+            if (proMode) {
+                binding.images.visibility = View.GONE
+                binding.migrateView.visibility = View.GONE
+
+            } else {
+                binding.images.visibility = View.VISIBLE
+                binding.migrateView.visibility = View.VISIBLE
+            }
+            binding.btnMigrate.setOnClickListener {
+                proMode = !proMode
+
+
+            }
+
+
+        }
+
         // Set the content view to the inflated layout
         setContentView(view)
 
@@ -69,29 +90,19 @@ class ListOfImagesActivity : AppCompatActivity() {
         getData(category, page)
 
         // Set up a scroll listener to load more data when scrolled to the bottom
-        binding.images.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                // Check if RecyclerView cannot scroll further down
-                if (!recyclerView.canScrollVertically(1)) {
-                    page++ // Increment page number for pagination
-                    getData(category, page) // Load more data
-                }
-            }
-        })
+//        binding.images.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+//            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+//                super.onScrolled(recyclerView, dx, dy)
+//                // Check if RecyclerView cannot scroll further down
+//                if (!recyclerView.canScrollVertically(1)) {
+//                    page++ // Increment page number for pagination
+//                    getData(category, page) // Load more data
+//                }
+//            }
+//        })
     }
 
-    // Function to hide the system UI for a fullscreen experience
-    private fun hideSystemUI() {
-        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_FULLSCREEN
-                or View.SYSTEM_UI_FLAG_LOW_PROFILE
-                or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                or View.SYSTEM_UI_FLAG_IMMERSIVE
-                or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION)
-    }
 
-    // Function to fetch data based on category and page
     private fun getData(category: String?, page: Int) {
         // Check the orientation of the device
         var orientation = checkOrientation(this)

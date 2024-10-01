@@ -23,14 +23,30 @@ class ImagesAdapter(val context: Context, val photos : ArrayList<Photo>) : Recyc
         fun bind(photo: Photo){
 
 
+            // Load the image using Picasso
             Picasso.get().load(photo.url.small)
                 .into(itemView.findViewById<ScaleImageView>(R.id.image))
-            if (isTablet(context)){
-                itemView.layoutParams.height = Random.nextInt(500,950)
-            }else{
-                itemView.layoutParams.height = Random.nextInt(400,750)
 
+            // Get the LayoutParams of the itemView
+            val layoutParams = itemView.layoutParams
+
+            // Calculate if the current item is in the last 3 positions
+            val lastThreeStartIndex = photos.size - 3
+            if (position >= lastThreeStartIndex) {
+                // Set fixed height for the last 3 images
+                layoutParams.height = 700
+            } else {
+                // Set random height based on whether it's a tablet or not
+                layoutParams.height = if (isTablet(context)) {
+                    Random.nextInt(500, 950)
+                } else {
+                    Random.nextInt(400, 750)
+                }
             }
+
+            // Apply the updated layout parameters to the itemView
+            itemView.layoutParams = layoutParams
+
             itemView.setOnClickListener {
                 context.let {
                     val intent = Intent(it, DisplayFullImageActivity::class.java)

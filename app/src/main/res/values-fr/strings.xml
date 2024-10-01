@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Welp</string>
+    <string name="copyright">Copyright © 2024</string>
+    <string name="splash_description">Wellp est une application mobile qui permet à l\'utilisateur d\'utiliser et d\'afficher un fond d\'écran magique</string>
+    <string name="to_view_more_image">Pour voir plus d\'images, veuillez activer le mode primaire. Ce mode permet de déverrouiller des contenus supplémentaires et d\'améliorer l\'expérience de navigation.</string>
+    <string name="txt_migrate">Migrer</string>
+
+</resources>
