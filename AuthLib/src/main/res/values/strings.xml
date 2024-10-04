@@ -1,4 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="txt_login">Login</string>
+    <string name="txt_please_enter_valid_email">Please enter a valid email address</string>
+    <string name="txt_email_required">Email is required</string>
+    <string name="txt_password_required">Password is required</string>
+    <string name="txt_password_more_then6">Password must be at least 6 characters</string>
+    <string name="dialog_invalid_login">Login or password is invalid</string>
+    <string name="dialog_msg_opes">Opes</string>
+    <string name="txt_ok">Ok</string>
+    <string name="txt_login_into_account">Login into your account</string>
+    <string name="txt_wlcm_back">Welcome back! Please enter your credentials</string>
+    <string name="txt_email">Email</string>
+    <string name="txt_enter_email">Enter your email</string>
+    <string name="txt_password">Password</string>
+    <string name="txt_enter_password">Enter your password</string>
+    <string name="txt_forget_password">Forget password</string>
 </resources>

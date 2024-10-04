@@ -1,6 +1,10 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'com.google.dagger.hilt.android'
+    id 'com.google.gms.google-services'
+
 }
 
 android {
@@ -34,9 +38,13 @@ android {
         jvmTarget = '1.8'
     }
 }
+def navVersion = "2.7.7"
 
 dependencies {
 
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'com.google.android.material:material:1.12.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     def composeBom = platform('androidx.compose:compose-bom:2024.09.02')
     implementation composeBom
     androidTestImplementation composeBom
@@ -44,6 +52,8 @@ dependencies {
     // Material Design 3
     implementation 'androidx.compose.material3:material3'
 
+    //Navigation
+    implementation("androidx.navigation:navigation-compose:$navVersion")
     // Android Studio Preview support
     implementation 'androidx.compose.ui:ui-tooling-preview'
     debugImplementation 'androidx.compose.ui:ui-tooling'
@@ -62,5 +72,24 @@ dependencies {
     // Optional - Integration with ViewModels
     implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.8.5'
 
+    //Dagger hilt
+    implementation("com.google.dagger:hilt-android:2.51.1")
+    kapt("com.google.dagger:hilt-compiler:2.51.1")
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+
+    //Firebase
+    // Import the BoM for the Firebase platform
+    implementation(platform("com.google.firebase:firebase-bom:33.3.0"))
+
+    // Add the dependency for the Firebase Authentication library
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation("com.google.firebase:firebase-auth")
+
+    // Also add the dependency for the Google Play services library and specify its version
+    implementation("com.google.android.gms:play-services-auth:21.2.0")
+
+
 
 }
+
+apply plugin: 'com.google.gms.google-services'

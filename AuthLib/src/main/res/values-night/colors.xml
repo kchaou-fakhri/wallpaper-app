@@ -4,6 +4,11 @@
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#5B5C63</color>
     <color name="green_200">#033323</color>
-    <color name="green">#42827e</color>
+    <color name="auth_green">#42827e</color>
     <color name="text_color">#0C0B0B</color>
+    <color name="background">#2B2C2E</color>
+    <color name="title_one_color">#f1f1f1</color>
+    <color name="background_text_filed">#777A81</color>
+
+
 </resources>

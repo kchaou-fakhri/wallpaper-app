@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "251287910509",
+    "project_id": "welp-f331d",
+    "storage_bucket": "welp-f331d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:251287910509:android:e2b084398b7a0fe5236764",
+        "android_client_info": {
+          "package_name": "com.dev0ko.ewelp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAsrXaWM1IckJO0rh9eVm0doGu_A8ItZXE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

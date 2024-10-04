@@ -1,18 +1,15 @@
 package com.dev0ko.ewelp.presentation.ui.image
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.dev0ko.authlib.presentation.view.LoginScreen
+import com.dev0ko.authlib.AuthLibraryActivity
 import com.dev0ko.ewelp.data.entity.Photo
 import com.dev0ko.ewelp.databinding.ActivityListOfImagesBinding
 import com.dev0ko.ewelp.presentation.ui.adapter.ImagesAdapter
@@ -45,33 +42,14 @@ class ListOfImagesActivity : AppCompatActivity() {
                 WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES
         }
 
-
-        binding.composeView.setContent {
-            var proMode by remember { mutableStateOf(false) }
-            if (proMode) {
-                LoginScreen(onClickBack = { proMode = !proMode })
-            }
-
-            if (proMode) {
-                binding.images.visibility = View.GONE
-                binding.migrateView.visibility = View.GONE
-
-            } else {
-                binding.images.visibility = View.VISIBLE
-                binding.migrateView.visibility = View.VISIBLE
-            }
-            binding.btnMigrate.setOnClickListener {
-                proMode = !proMode
-
-
-            }
-
-
-        }
-
-        // Set the content view to the inflated layout
         setContentView(view)
 
+        binding.btnMigrate.setOnClickListener {
+            this.let {
+                val intent = Intent(it, AuthLibraryActivity::class.java)
+                it.startActivity(intent)
+            }
+        }
         // Get the category from the intent extras
         val category = intent.extras?.getString(Constants.CATEGORY)
 
@@ -110,6 +88,7 @@ class ListOfImagesActivity : AppCompatActivity() {
         photoVM.getData(category!!, 30, page, orientation).observe(this, Observer {
             images.addAll(it) // Add new images to the list
             imagesAdapter.notifyDataSetChanged() // Notify adapter of data change
+            binding.migrateView.visibility = View.VISIBLE
         })
     }
 }

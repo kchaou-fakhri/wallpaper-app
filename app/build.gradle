@@ -3,6 +3,8 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'com.google.dagger.hilt.android'
+    id 'com.google.gms.google-services'
+
 }
 
 def localProperties = new Properties()
@@ -11,12 +13,8 @@ localProperties.load(new FileInputStream(rootProject.file("local.properties")))
 android {
     compileSdk 34
     namespace "com.dev0ko.ewelp"
-    composeOptions {
-        kotlinCompilerExtensionVersion '1.5.0'
-    }
     buildFeatures {
         buildConfig true
-        compose true
     }
     defaultConfig {
         applicationId "com.dev0ko.ewelp"
@@ -87,12 +85,7 @@ dependencies {
     kapt "com.google.dagger:hilt-compiler:2.51.1"
 
 
-    // Jetpack Compose dependencies
-    implementation "androidx.activity:activity-compose:1.7.2"
-    implementation "androidx.compose.ui:ui:1.5.3"
-    implementation "androidx.compose.material3:material3:1.2.1"
-    implementation "androidx.compose.ui:ui-tooling-preview:1.5.3"
-    debugImplementation "androidx.compose.ui:ui-tooling:1.5.3"
+
 
 }
 
