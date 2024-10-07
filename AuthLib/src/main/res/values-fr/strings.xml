@@ -15,4 +15,7 @@
     <string name="txt_password">Mot de passe</string>
     <string name="txt_enter_password">Entrez votre mot de passe</string>
     <string name="txt_forget_password">Vous avez oublié votre mot de passe ?</string>
+    <string name="txt_sign_up">Vous n\'avez pas de compte ? S\'inscrire</string>
+    <string name="txt_or">- ou -</string>
+
 </resources>

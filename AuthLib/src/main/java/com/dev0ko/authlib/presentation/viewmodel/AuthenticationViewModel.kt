@@ -1,4 +1,4 @@
-package com.dev0kch.chatbot.presentation.viewmodel
+package com.dev0ko.authlib.presentation.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
@@ -56,6 +56,17 @@ class AuthenticationViewModel @Inject constructor(
     suspend fun signUp(email: String, password: String) :Flow<Resource<FirebaseUser?>> {
         return authRepositoryImpl.signup(User(email, password, null))
 
+    }
+
+     fun logout() {
+        viewModelScope.launch {
+            authRepositoryImpl.logout().collect { resource ->
+                if (resource is Resource.Success && resource.result != null) {
+                    _isAuthenticated.value = false
+                    Log.d("AuthenticationViewModel", "User logged in successfully.")
+                }
+            }
+        }
     }
 
 

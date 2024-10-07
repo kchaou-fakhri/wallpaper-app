@@ -32,7 +32,7 @@ fun GradientButton(
     Button(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(start = 32.dp, end = 32.dp)
+
             .then(modifier),
 
         onClick = onClick,

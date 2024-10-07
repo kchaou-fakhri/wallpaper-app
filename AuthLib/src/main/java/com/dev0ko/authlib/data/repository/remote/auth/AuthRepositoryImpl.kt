@@ -53,4 +53,20 @@ class AuthRepositoryImpl @Inject constructor(
 
         }
     }
+
+    override suspend fun logout(): Flow<Resource<Boolean>> {
+
+        return flow {
+            try {
+                val result =
+                    firebaseAuth.signOut()
+                Resource.Success(true)
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Resource.Failure(e)
+            }
+
+        }
+    }
+
 }

@@ -34,7 +34,7 @@
         android:text="Nature"
         android:background="#12333333"
         android:gravity="center"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:fontFamily="@font/edu_guides_bold"
         android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -15,4 +15,6 @@
     <string name="txt_password">Password</string>
     <string name="txt_enter_password">Enter your password</string>
     <string name="txt_forget_password">Forget password</string>
+    <string name="txt_sign_up">Don’t Have An Account? Sign Up</string>
+    <string name="txt_or">- or -</string>
 </resources>

@@ -34,6 +34,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -43,15 +44,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import com.dev0kch.chatbot.presentation.viewmodel.AuthenticationViewModel
+import com.dev0ko.authlib.presentation.viewmodel.AuthenticationViewModel
 import com.dev0kch.chatbot.ui.theme.textColorHint
 import com.dev0kch.chatbot.ui.theme.textError
 import com.dev0ko.authlib.R
+import com.dev0ko.authlib.presentation.navigation.Route
 import com.dev0ko.authlib.presentation.view.components.CustomLoading
 import com.dev0ko.authlib.presentation.view.components.GradientButton
 import com.dev0ko.authlib.utils.CustomAlertDialog
 import com.dev0ko.authlib.utils.GlobalStyles
 import com.dev0ko.authlib.utils.Resource
+import com.dev0ko.authlib.utils.findActivity
 import com.dev0ko.authlib.utils.translate.STRINGS
 import com.dev0ko.authlib.utils.translate.getAuthString
 import com.dev0ko.authlib.utils.validateEmail
@@ -61,10 +64,10 @@ import com.dev0ko.authlib.utils.validateEmail
  */
 @Composable
 fun LoginScreen(
-    onClickBack: () -> Unit,
     navController: NavHostController?,
     authenticationViewModel: AuthenticationViewModel = hiltViewModel()
 ) {
+    val context = LocalContext.current
 
     var isEmailError by remember { mutableStateOf("") }
     var isPasswordError by remember { mutableStateOf("") }
@@ -79,7 +82,11 @@ fun LoginScreen(
     Column(
         modifier = Modifier
             .background(color = colorResource(id = R.color.background))
-            .padding(top = 25.dp, start = 15.dp)
+            .padding(
+                top = 25.dp,
+                start = GlobalStyles.Padding.ScreenPadding,
+                end = GlobalStyles.Padding.ScreenPadding
+            )
             .fillMaxSize()
 
     ) {
@@ -90,7 +97,11 @@ fun LoginScreen(
                 .background(color = Color.White)
                 .width(50.dp)
                 .height(50.dp)
-                .clickable { onClickBack() },
+                .clickable {
+                    context
+                        .findActivity()
+                        ?.finish()
+                 },
             contentAlignment = Alignment.Center
         ) {
             Icon(
@@ -117,7 +128,7 @@ fun LoginScreen(
 
                 is Resource.Success -> {
                     //        Handle success
-                    // navController?.navigate(Route.MainDrawer.route)
+                    navController?.navigate(Route.HomeScreen.route)
                     loading = false
                 }
 
@@ -159,7 +170,9 @@ fun LoginScreen(
             }
 
             Row(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth(),
+
                 horizontalArrangement = Arrangement.Center
             ) {
                 Image(
@@ -175,8 +188,6 @@ fun LoginScreen(
                 text = stringResource(id = R.string.txt_login_into_account),
                 modifier = Modifier.padding(
                     top = GlobalStyles.Padding.ScreenPadding,
-                    start = GlobalStyles.Padding.ScreenPadding,
-                    end = GlobalStyles.Padding.ScreenPadding,
                     bottom = 10.dp
                 ),
                 color = colorResource(id = R.color.title_one_color),
@@ -186,9 +197,7 @@ fun LoginScreen(
 
             Text(
                 text = stringResource(id = R.string.txt_wlcm_back),
-                modifier = Modifier.padding(
-                    start = GlobalStyles.Padding.ScreenPadding,
-                ),
+
                 color = textColorHint,
                 fontSize = 13.sp,
                 fontWeight = FontWeight.W400
@@ -201,9 +210,8 @@ fun LoginScreen(
                 color = colorResource(id = R.color.title_one_color),
                 modifier = Modifier.padding(
                     top = GlobalStyles.Padding.ScreenPadding,
-                    start = GlobalStyles.Padding.ScreenPadding,
-                    end = GlobalStyles.Padding.ScreenPadding
-                ), fontSize = 13.sp
+
+                    ), fontSize = 13.sp
 
             )
             TextField(
@@ -219,10 +227,7 @@ fun LoginScreen(
 
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(
-                        start = GlobalStyles.Padding.ScreenPadding,
-                        end = GlobalStyles.Padding.ScreenPadding
-                    )
+
                     .border(
                         shape = RoundedCornerShape(10),
                         border = BorderStroke(1.dp, color = colorResource(id = R.color.white))
@@ -245,9 +250,8 @@ fun LoginScreen(
                     .padding(
                         top = 2.dp,
                         bottom = 5.dp,
-                        start = GlobalStyles.Padding.ScreenPadding,
-                        end = GlobalStyles.Padding.ScreenPadding
-                    ),
+
+                        ),
             )
 
             Text(
@@ -255,10 +259,9 @@ fun LoginScreen(
                 fontSize = 13.sp,
                 color = colorResource(id = R.color.title_one_color),
                 modifier = Modifier.padding(
-                    top = 10.dp,
-                    start = GlobalStyles.Padding.ScreenPadding,
-                    end = GlobalStyles.Padding.ScreenPadding
-                ),
+                    top = 5.dp,
+
+                    ),
             )
             TextField(
 
@@ -279,10 +282,7 @@ fun LoginScreen(
                 ),
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(
-                        start = GlobalStyles.Padding.ScreenPadding,
-                        end = GlobalStyles.Padding.ScreenPadding
-                    )
+
                     .border(
                         shape = RoundedCornerShape(10),
                         border = BorderStroke(1.dp, color = colorResource(id = R.color.white))
@@ -298,18 +298,14 @@ fun LoginScreen(
                     .fillMaxWidth()
                     .padding(
                         top = 2.dp,
-                        start = GlobalStyles.Padding.ScreenPadding,
-                        end = GlobalStyles.Padding.ScreenPadding
-                    ),
+
+                        ),
             )
 
 
             Row(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(
-                        end = GlobalStyles.Padding.ScreenPadding
-                    ),
+                    .fillMaxWidth(),
                 horizontalArrangement = Arrangement.End
             ) {
                 Text(
@@ -335,6 +331,62 @@ fun LoginScreen(
                     }
                 }
             )
+            Row(
+                modifier = Modifier
+                    .padding(top = 15.dp)
+
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center,
+
+                ) {
+                Text(
+                    modifier = Modifier.clickable { },
+                    text = stringResource(id = R.string.txt_sign_up),
+                    color = colorResource(id = R.color.title_one_color),
+                    fontSize = 15.sp,
+                    fontWeight = FontWeight.W700
+                )
+            }
+
+
+            Column(
+                modifier = Modifier
+                    .padding(top = 15.dp)
+
+                    .fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally
+
+            ) {
+                Text(
+
+                    text = stringResource(id = R.string.txt_or),
+                    color = colorResource(id = R.color.auth_green),
+                    fontSize = 13.sp,
+                    fontWeight = FontWeight.W700
+                )
+
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Image(
+                        painter = painterResource(id = R.drawable.google_logo),
+                        contentDescription = null,
+                        modifier = Modifier
+                            .height(54.dp)
+                            .padding(top = 20.dp, end = 20.dp),
+                        contentScale = ContentScale.Fit,
+                    )
+                    Image(
+                        painter = painterResource(id = R.drawable.fb_logo),
+                        contentDescription = null,
+                        modifier = Modifier
+                            .height(50.dp)
+                            .padding(top = 20.dp, start = 20.dp),
+                        contentScale = ContentScale.Fit,
+                    )
+                }
+            }
         }
 
     }
@@ -375,7 +427,7 @@ fun validateCredentials(email: String, password: String): Pair<String, String> {
 @Preview
 @Composable
 fun LoginScreenPreview(){
-        LoginScreen(onClickBack = { /*TODO*/ }, navController = null, )
+        LoginScreen( navController = null, )
 
 }
 
