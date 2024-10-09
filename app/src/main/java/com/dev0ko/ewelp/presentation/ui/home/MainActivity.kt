@@ -30,7 +30,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
 
 
-
         binding.searchField.setOnEditorActionListener { v, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                 val searchText = binding.searchField.text.toString()
