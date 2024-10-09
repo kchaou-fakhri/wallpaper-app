@@ -1,8 +1,12 @@
 package com.dev0ko.authlib.presentation.view.components
 
+import android.content.res.Configuration
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -16,13 +20,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.dev0kch.chatbot.ui.theme.textColorInCard
 import com.dev0kch.chatbot.ui.theme.transparent
+import com.dev0kch.chatbot.ui.theme.white
+import com.dev0ko.authlib.R
 
 
 @Composable
@@ -31,25 +38,31 @@ fun CardWithIcon(
     icon: Painter,
     fontSize: TextUnit,
     background: Color,
-    modifier: Modifier,
-    textModifier : Modifier = Modifier
+    modifier: Modifier = Modifier,
+    textModifier: Modifier = Modifier,
+    onClick : () -> Unit
 ) {
     Card(
         colors = CardDefaults.cardColors(
             containerColor = background,
         ),
-
-        modifier = Modifier.fillMaxWidth().then(modifier)
+        border = BorderStroke(2.dp, colorResource(id = R.color.auth_gray)),
+        modifier = Modifier
+            .width(150.dp)
+            .then(modifier)
+            .clickable { onClick() }
 
 
     ) {
-        Box(
-            contentAlignment = Alignment.Center,
+        Row(
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
-                .width(65.dp)
-                .height(60.dp)
-                .padding(start = 15.dp, top = 10.dp)
-                .background(transparent, shape = RoundedCornerShape(25.dp))
+
+                .height(50.dp)
+                .fillMaxWidth()
+
+                .background(transparent, shape = RoundedCornerShape(2.dp))
 
         ) {
             Image(
@@ -57,24 +70,31 @@ fun CardWithIcon(
 
 
             )
+            Text(
+                text,
+                modifier = Modifier
+                    .padding(start = 10.dp)
+                    .then(textModifier),
+                fontSize = fontSize,
+                lineHeight = 40.sp,
+                fontWeight = FontWeight.W400,
+                color = colorResource(id = R.color.text_color)
+            )
         }
 
-        Text(
-            text,
-            modifier = Modifier
-                .padding(15.dp)
-                .then(textModifier)
-                ,
-            fontSize = fontSize,
-            lineHeight = 40.sp,
-            fontWeight = FontWeight.W400,
-            color = textColorInCard
-        )
+
     }
 
 }
 
-@Preview(showSystemUi = true)
+@Preview(uiMode =  Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun CardWithIconPreview() {
+    CardWithIcon(
+        text = "Google",
+        icon = painterResource(id = R.drawable.google_logo),
+        fontSize = 15.sp,
+        background = white,
+        onClick = {}
+    )
 }

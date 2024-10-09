@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+
 import javax.inject.Inject
 
 @HiltViewModel
@@ -53,7 +54,9 @@ class AuthenticationViewModel @Inject constructor(
         }
     }
 
-    suspend fun signUp(email: String, password: String) :Flow<Resource<FirebaseUser?>> {
+
+
+    suspend fun signUp(email: String, password: String): Flow<Resource<FirebaseUser?>> {
         return authRepositoryImpl.signup(User(email, password, null))
 
     }
@@ -67,7 +70,21 @@ class AuthenticationViewModel @Inject constructor(
                 }
             }
         }
+     }
+
+
+
+    suspend fun onSignInResult(result: Flow<Resource<FirebaseUser>>) {
+         result.collect { resource ->
+             _loginFlow.value = resource
+
+             if (resource is Resource.Success && resource.result != null) {
+                 _isAuthenticated.value = true
+                 Log.d("AuthenticationViewModel", "User logged in successfully.")
+             }
+        }
     }
+
 
 
 }

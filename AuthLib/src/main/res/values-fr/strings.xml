@@ -17,5 +17,7 @@
     <string name="txt_forget_password">Vous avez oublié votre mot de passe ?</string>
     <string name="txt_sign_up">Vous n\'avez pas de compte ? S\'inscrire</string>
     <string name="txt_or">- ou -</string>
+    <string name="txt_google">Google</string>
+    <string name="txt_facebook">Facebook</string>
 
 </resources>

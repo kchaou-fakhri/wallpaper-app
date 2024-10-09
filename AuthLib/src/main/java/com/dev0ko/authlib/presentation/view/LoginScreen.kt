@@ -1,5 +1,9 @@
 package com.dev0ko.authlib.presentation.view
 
+import android.app.Activity
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.IntentSenderRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -28,6 +32,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -44,13 +49,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import com.dev0ko.authlib.presentation.viewmodel.AuthenticationViewModel
 import com.dev0kch.chatbot.ui.theme.textColorHint
 import com.dev0kch.chatbot.ui.theme.textError
+import com.dev0kch.chatbot.ui.theme.transparent
 import com.dev0ko.authlib.R
 import com.dev0ko.authlib.presentation.navigation.Route
+import com.dev0ko.authlib.presentation.signin.GoogleAuthUiClient
+import com.dev0ko.authlib.presentation.view.components.CardWithIcon
 import com.dev0ko.authlib.presentation.view.components.CustomLoading
 import com.dev0ko.authlib.presentation.view.components.GradientButton
+import com.dev0ko.authlib.presentation.viewmodel.AuthenticationViewModel
 import com.dev0ko.authlib.utils.CustomAlertDialog
 import com.dev0ko.authlib.utils.GlobalStyles
 import com.dev0ko.authlib.utils.Resource
@@ -58,16 +66,40 @@ import com.dev0ko.authlib.utils.findActivity
 import com.dev0ko.authlib.utils.translate.STRINGS
 import com.dev0ko.authlib.utils.translate.getAuthString
 import com.dev0ko.authlib.utils.validateEmail
+import com.google.android.gms.auth.api.identity.Identity
+import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.launch
 
-/**
- * @param onClickBack this param for add a custom action for top back button
- */
 @Composable
 fun LoginScreen(
     navController: NavHostController?,
     authenticationViewModel: AuthenticationViewModel = hiltViewModel()
 ) {
     val context = LocalContext.current
+    val coroutineScope = rememberCoroutineScope()
+
+    val googleAuthUiClient = remember {
+        GoogleAuthUiClient(
+            context = context,
+            oneTapClient = Identity.getSignInClient(context),
+            auth = FirebaseAuth.getInstance()
+        )
+    }
+
+    // Launcher to handle the IntentSender
+    val signInLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.StartIntentSenderForResult()
+    ) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            result.data?.let { intent ->
+                coroutineScope.launch {
+                    val signInRes = googleAuthUiClient.signInWithIntent(intent)
+                    authenticationViewModel.onSignInResult(signInRes)
+
+                }
+            }
+        }
+    }
 
     var isEmailError by remember { mutableStateOf("") }
     var isPasswordError by remember { mutableStateOf("") }
@@ -101,7 +133,7 @@ fun LoginScreen(
                     context
                         .findActivity()
                         ?.finish()
-                 },
+                },
             contentAlignment = Alignment.Center
         ) {
             Icon(
@@ -365,25 +397,39 @@ fun LoginScreen(
                     fontWeight = FontWeight.W700
                 )
 
+
+
+
                 Row(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 20.dp),
                     horizontalArrangement = Arrangement.Center
                 ) {
-                    Image(
-                        painter = painterResource(id = R.drawable.google_logo),
-                        contentDescription = null,
-                        modifier = Modifier
-                            .height(54.dp)
-                            .padding(top = 20.dp, end = 20.dp),
-                        contentScale = ContentScale.Fit,
+                    CardWithIcon(
+                        stringResource(id = R.string.txt_google),
+                        icon = painterResource(id = R.drawable.google_logo),
+                        fontSize = 15.sp,
+                        background = transparent,
+                        modifier = Modifier.padding(end = 10.dp),
+                        onClick = {
+                            coroutineScope.launch {
+                                val intentSender = googleAuthUiClient.signIn()
+                                if (intentSender != null) {
+                                    val request = IntentSenderRequest.Builder(intentSender).build()
+                                    signInLauncher.launch(request)
+                                }
+
+                            }
+                        }
                     )
-                    Image(
-                        painter = painterResource(id = R.drawable.fb_logo),
-                        contentDescription = null,
-                        modifier = Modifier
-                            .height(50.dp)
-                            .padding(top = 20.dp, start = 20.dp),
-                        contentScale = ContentScale.Fit,
+
+                    CardWithIcon(
+                        stringResource(id = R.string.txt_facebook),
+                        icon = painterResource(id = R.drawable.fb_logo),
+                        fontSize = 15.sp,
+                        background = transparent,
+                        modifier = Modifier.padding(start = 10.dp), onClick = {}
                     )
                 }
             }

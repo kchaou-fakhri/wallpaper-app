@@ -17,4 +17,7 @@
     <string name="txt_forget_password">Forget password</string>
     <string name="txt_sign_up">Don’t Have An Account? Sign Up</string>
     <string name="txt_or">- or -</string>
+    <string name="txt_google">Google</string>
+    <string name="txt_facebook">Facebook</string>
+    <string name="web_client_id" translatable="false">973088131159-vcsjtbv98ilbkb4qtqmrpdlcvqudd0qa.apps.googleusercontent.com</string>
 </resources>

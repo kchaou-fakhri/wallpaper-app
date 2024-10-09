@@ -17,3 +17,7 @@
 # Keep retrofit classes when runing the release version
 -keep class retrofit2.** { *; }
 
+-if class androidx.credentials.CredentialManager
+-keep class androidx.credentials.playservices.** {
+  *;
+}
