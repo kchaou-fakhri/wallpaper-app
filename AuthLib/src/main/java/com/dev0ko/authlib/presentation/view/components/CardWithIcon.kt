@@ -48,7 +48,7 @@ fun CardWithIcon(
         ),
         border = BorderStroke(2.dp, colorResource(id = R.color.auth_gray)),
         modifier = Modifier
-            .width(150.dp)
+            .fillMaxWidth()
             .then(modifier)
             .clickable { onClick() }
 
@@ -59,7 +59,7 @@ fun CardWithIcon(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
 
-                .height(50.dp)
+                .height(45.dp)
                 .fillMaxWidth()
 
                 .background(transparent, shape = RoundedCornerShape(2.dp))

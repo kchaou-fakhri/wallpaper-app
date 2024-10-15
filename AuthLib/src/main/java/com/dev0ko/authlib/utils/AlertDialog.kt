@@ -7,6 +7,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -17,17 +19,19 @@ fun CustomAlertDialog(
     confirmationText: String?,
     dialogTitle: String,
     dialogText: String,
-    icon: ImageVector,
+    icon: ImageVector?  = null,
 ) {
     AlertDialog(
         icon = {
-            Icon(icon, contentDescription = "")
+            if (icon != null) {
+                Icon(icon, contentDescription = "")
+            }
         },
         title = {
-            Text(text = dialogTitle)
+            Text(text = dialogTitle, fontSize = 15.sp, fontWeight = FontWeight.W700)
         },
         text = {
-            Text(text = dialogText)
+            Text(text = dialogText, fontSize = 13.sp)
         },
         onDismissRequest = {
             onDismissRequest()

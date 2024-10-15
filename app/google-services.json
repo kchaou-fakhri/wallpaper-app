@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "973088131159-t1rn5llccp1tjlhk4u3oqq1bar6s0d6s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dev0ko.ewelp",
+            "certificate_hash": "373ff7c2f863c3b547d73d2bd68283dc901ab41e"
+          }
+        },
+        {
           "client_id": "973088131159-vcsjtbv98ilbkb4qtqmrpdlcvqudd0qa.apps.googleusercontent.com",
           "client_type": 3
         }
