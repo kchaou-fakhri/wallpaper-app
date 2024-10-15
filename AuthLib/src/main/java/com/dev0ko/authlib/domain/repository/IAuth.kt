@@ -11,4 +11,5 @@ interface IAuth {
     suspend fun signup(user : User) : Flow<Resource<FirebaseUser>>
 
     suspend fun logout(): Flow<Resource<Boolean>>
+    suspend fun forgetPassword(email: String):  Flow<Resource<Boolean>>
 }

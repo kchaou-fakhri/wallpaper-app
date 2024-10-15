@@ -1,9 +1,5 @@
 package com.dev0ko.authlib.presentation.view
 
-import android.app.Activity
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.IntentSenderRequest
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -52,64 +48,39 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.dev0kch.chatbot.ui.theme.textColorHint
 import com.dev0kch.chatbot.ui.theme.textError
-import com.dev0kch.chatbot.ui.theme.transparent
 import com.dev0ko.authlib.R
 import com.dev0ko.authlib.presentation.navigation.Route
-import com.dev0ko.authlib.presentation.signin.GoogleAuthUiClient
-import com.dev0ko.authlib.presentation.view.components.CardWithIcon
 import com.dev0ko.authlib.presentation.view.components.CustomLoading
 import com.dev0ko.authlib.presentation.view.components.GradientButton
 import com.dev0ko.authlib.presentation.viewmodel.AuthenticationViewModel
 import com.dev0ko.authlib.utils.CustomAlertDialog
 import com.dev0ko.authlib.utils.GlobalStyles
 import com.dev0ko.authlib.utils.Resource
-import com.dev0ko.authlib.utils.findActivity
+import com.dev0ko.authlib.utils.translate.STRINGS
+import com.dev0ko.authlib.utils.translate.getAuthString
 import com.dev0ko.authlib.utils.validateCredentials
-import com.google.android.gms.auth.api.identity.Identity
-import com.google.firebase.auth.FirebaseAuth
-import kotlinx.coroutines.launch
 
 @Composable
-fun LoginScreen(
+fun RegisterScreen(
     navController: NavHostController?,
     authenticationViewModel: AuthenticationViewModel = hiltViewModel()
 ) {
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
 
-    val googleAuthUiClient = remember {
-        GoogleAuthUiClient(
-            context = context,
-            oneTapClient = Identity.getSignInClient(context),
-            auth = FirebaseAuth.getInstance()
-        )
-    }
 
-
-    // Launcher to handle the IntentSender
-    val signInLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.StartIntentSenderForResult()
-    ) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            result.data?.let { intent ->
-                coroutineScope.launch {
-                    val signInRes = googleAuthUiClient.signInWithIntent(intent)
-                    authenticationViewModel.onSignInResult(signInRes)
-
-                }
-            }
-        }
-    }
-
+    // Launcher to handle the IntentSende
     var isEmailError by remember { mutableStateOf("") }
+    var isUsernameError by remember { mutableStateOf("") }
     var isPasswordError by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    var username by remember { mutableStateOf("") }
+    val interactionSource = remember { MutableInteractionSource() }
 
     var loading by remember { mutableStateOf(false) }
     var loginError by remember { mutableStateOf(false) }
     val loginFlow by authenticationViewModel.loginFLow.collectAsState()
-    val interactionSource = remember { MutableInteractionSource() }
 
 
     Column(
@@ -134,9 +105,7 @@ fun LoginScreen(
                 .width(50.dp)
                 .height(50.dp)
                 .clickable {
-                    context
-                        .findActivity()
-                        ?.finish()
+                    navController?.navigate(Route.LoginScreen.route)
                 },
             contentAlignment = Alignment.Center
         ) {
@@ -199,7 +168,7 @@ fun LoginScreen(
                     onConfirmation = { loginError = false },
                     confirmationText = stringResource(id = R.string.txt_ok),
                     dialogTitle = stringResource(id = R.string.dialog_msg_opes),
-                    dialogText = stringResource(id = R.string.dialog_invalid_login),
+                    dialogText = stringResource(id = R.string.dialog_invalid_register),
 
                     )
             }
@@ -220,7 +189,7 @@ fun LoginScreen(
                 )
             }
             Text(
-                text = stringResource(id = R.string.txt_login_into_account),
+                text = stringResource(id = R.string.txt_create_account),
                 modifier = Modifier.padding(
                     top = GlobalStyles.Padding.ScreenPadding,
                     bottom = 10.dp
@@ -231,7 +200,7 @@ fun LoginScreen(
             )
 
             Text(
-                text = stringResource(id = R.string.txt_wlcm_back),
+                text = stringResource(id = R.string.txt_wlcm),
 
                 color = textColorHint,
                 fontSize = 13.sp,
@@ -239,12 +208,55 @@ fun LoginScreen(
             )
 
 
+            Text(
+                text = stringResource(id = R.string.txt_username),
+                color = colorResource(id = R.color.title_one_color),
+                modifier = Modifier.padding(
+                    top = 2.dp,
+
+                    ), fontSize = 13.sp
+
+            )
+            TextField(
+
+                value = username,
+                onValueChange = { username = it },
+                label = {
+                    Text(
+                        text = stringResource(id = R.string.txt_enter_name),
+                        fontSize = 13.sp
+                    )
+                },
+
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .border(
+                        shape = RoundedCornerShape(10),
+                        border = BorderStroke(1.dp, color = colorResource(id = R.color.white))
+                    ),
+                colors = TextFieldDefaults.colors(
+                    focusedContainerColor = colorResource(id = R.color.background_text_filed), // To avoid default background
+                    unfocusedContainerColor = colorResource(id = R.color.background_text_filed),
+                    unfocusedIndicatorColor = Color.Transparent,
+                    focusedIndicatorColor = Color.Transparent
+
+                )
+            )
+
+            Text(
+                text = isUsernameError,
+                color = textError,
+                fontSize = GlobalStyles.Text.H5,
+                modifier = Modifier
+                    .fillMaxWidth(),
+            )
+
 
             Text(
                 text = stringResource(id = R.string.txt_email),
                 color = colorResource(id = R.color.title_one_color),
                 modifier = Modifier.padding(
-                    top = GlobalStyles.Padding.ScreenPadding,
+                    top = 2.dp,
 
                     ), fontSize = 13.sp
 
@@ -281,12 +293,7 @@ fun LoginScreen(
                 color = textError,
                 fontSize = GlobalStyles.Text.H5,
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(
-                        top = 2.dp,
-                        bottom = 3.dp,
-
-                        ),
+                    .fillMaxWidth(),
             )
 
             Text(
@@ -330,46 +337,28 @@ fun LoginScreen(
                 color = textError,
                 fontSize = GlobalStyles.Text.H5,
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(
-                        top = 2.dp,
-
-                        ),
+                    .fillMaxWidth(),
             )
 
 
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                horizontalArrangement = Arrangement.End
-            ) {
-                Text(
-                    text = stringResource(id = R.string.txt_forget_password),
-                    color = textColorHint,
-                    fontSize = 13.sp,
-                    fontWeight = FontWeight.W700,
-                    modifier = Modifier.clickable(
-                        onClick = { navController?.navigate(Route.ForgetPasswordScreen.route) },
-                        interactionSource = interactionSource,
-
-                        indication = null
-                    ),
-                )
-            }
 
             GradientButton(
                 gradientColors = listColors,
-                cornerRadius = 5.dp, nameButton = stringResource(id = R.string.txt_login),
+                cornerRadius = 5.dp, nameButton = stringResource(id = R.string.txt_register),
                 roundedCornerShape = RoundedCornerShape(5.dp),
                 modifier = Modifier.padding(top = 20.dp),
                 onClick = {
                     val errors = validateCredentials(email, password)
                     isEmailError = errors.first
                     isPasswordError = errors.second
+                    if (username.isEmpty()) isUsernameError =
+                        getAuthString(STRINGS.USERNAME_IS_REQUIRED)
 
                     if (isEmailError.isEmpty() && isPasswordError.isEmpty()) {
                         email = email.replace(" ", "")
-                        authenticationViewModel.login(email, password)
+                        username = username.replace(" ", "")
+                        authenticationViewModel.signUp(email, password, username)
+
                     }
                 }
             )
@@ -377,18 +366,18 @@ fun LoginScreen(
                 modifier = Modifier
                     .padding(top = 10.dp)
 
-                    .fillMaxWidth(),
+                    .fillMaxWidth()
+                    .clickable(
+                        onClick = { navController?.navigate(Route.LoginScreen.route) },
+                        interactionSource = interactionSource,
+
+                         indication = null
+                    ),
                 horizontalArrangement = Arrangement.Center,
 
                 ) {
                 Text(
-                    modifier = Modifier.clickable(
-                        onClick = { navController?.navigate(Route.RegisterScreen.route) },
-                        interactionSource = interactionSource,
-
-                        indication = null
-                    ),
-                    text = stringResource(id = R.string.txt_sign_up),
+                    text = stringResource(id = R.string.txt_sign_in),
                     color = colorResource(id = R.color.title_one_color),
                     fontSize = 13.sp,
                     fontWeight = FontWeight.W700
@@ -396,51 +385,6 @@ fun LoginScreen(
             }
 
 
-            Column(
-                modifier = Modifier
-                    .padding(top = 15.dp)
-
-                    .fillMaxWidth(),
-                horizontalAlignment = Alignment.CenterHorizontally
-
-            ) {
-                Text(
-
-                    text = stringResource(id = R.string.txt_or),
-                    color = colorResource(id = R.color.auth_green),
-                    fontSize = 13.sp,
-                    fontWeight = FontWeight.W700
-                )
-
-
-
-
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 10.dp),
-                    horizontalArrangement = Arrangement.Center
-                ) {
-                    CardWithIcon(
-                        stringResource(id = R.string.txt_google),
-                        icon = painterResource(id = R.drawable.google_logo),
-                        fontSize = 15.sp,
-                        background = transparent,
-                        modifier = Modifier.padding(end = 10.dp),
-                        onClick = {
-                            coroutineScope.launch {
-                                val intentSender = googleAuthUiClient.signIn()
-                                if (intentSender != null) {
-                                    val request = IntentSenderRequest.Builder(intentSender).build()
-                                    signInLauncher.launch(request)
-                                }
-
-                            }
-                        }
-                    )
-
-                }
-            }
         }
 
     }
@@ -449,11 +393,10 @@ fun LoginScreen(
 }
 
 
-
 @Preview
 @Composable
-fun LoginScreenPreview(){
-        LoginScreen( navController = null, )
+fun RegisterScreenPreview() {
+    RegisterScreen(navController = null)
 
 }
 
