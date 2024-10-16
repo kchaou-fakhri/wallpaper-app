@@ -1,11 +1,15 @@
 package com.dev0ko.authlib.presentation.viewmodel
 
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dev0ko.authlib.data.repository.remote.auth.AuthRepositoryImpl
 import com.dev0ko.authlib.domain.entity.User
+import com.dev0ko.authlib.presentation.signin.UserData
 import com.dev0ko.authlib.utils.Resource
+import com.dev0ko.authlib.utils.firebaseUserToUserData
 import com.google.firebase.auth.FirebaseUser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
@@ -103,6 +107,13 @@ class AuthenticationViewModel @Inject constructor(
                  Log.d("AuthenticationViewModel", "User logged in successfully.")
              }
         }
+    }
+
+
+    fun getConnectedUser(): LiveData<UserData?> {
+        val mutableLiveData = MutableLiveData<UserData?>()
+        mutableLiveData.value = firebaseUserToUserData(currentUser)
+        return mutableLiveData
     }
 
 

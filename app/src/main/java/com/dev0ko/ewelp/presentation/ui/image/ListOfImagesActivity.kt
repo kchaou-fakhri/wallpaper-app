@@ -3,6 +3,8 @@ package com.dev0ko.ewelp.presentation.ui.image
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.view.WindowManager
 import androidx.activity.viewModels
@@ -10,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.dev0ko.authlib.AuthLibraryActivity
+import com.dev0ko.authlib.presentation.viewmodel.AuthenticationViewModel
 import com.dev0ko.ewelp.data.entity.Photo
 import com.dev0ko.ewelp.databinding.ActivityListOfImagesBinding
 import com.dev0ko.ewelp.presentation.ui.adapter.ImagesAdapter
@@ -18,13 +21,15 @@ import com.dev0ko.ewelp.utils.Constants
 import com.dev0ko.ewelp.utils.checkOrientation
 import dagger.hilt.android.AndroidEntryPoint
 
-// Entry point for dependency injection using Hilt
 @AndroidEntryPoint
 class ListOfImagesActivity : AppCompatActivity() {
     private lateinit var binding: ActivityListOfImagesBinding
     private val photoVM: PhotoViewModel by viewModels()
     private lateinit var imagesAdapter: ImagesAdapter
     private var images: ArrayList<Photo> = arrayListOf()
+
+    private val authenticationViewModel: AuthenticationViewModel by viewModels()
+
     // Current page for pagination
     var page = 1
 
@@ -43,6 +48,9 @@ class ListOfImagesActivity : AppCompatActivity() {
         }
 
         setContentView(view)
+
+
+
 
         binding.btnMigrate.setOnClickListener {
             this.let {
@@ -78,6 +86,21 @@ class ListOfImagesActivity : AppCompatActivity() {
 //                }
 //            }
 //        })
+
+
+        authenticationViewModel.getConnectedUser().observe(this, Observer {
+            if (it != null) {
+
+                binding.migrateView.visibility = View.GONE
+            } else {
+
+                Handler(Looper.getMainLooper()).postDelayed({
+                    binding.migrateView.visibility = View.VISIBLE
+                }, 1000)
+
+
+            }
+        })
     }
 
 
@@ -88,7 +111,18 @@ class ListOfImagesActivity : AppCompatActivity() {
         photoVM.getData(category!!, 30, page, orientation).observe(this, Observer {
             images.addAll(it) // Add new images to the list
             imagesAdapter.notifyDataSetChanged() // Notify adapter of data change
-            binding.migrateView.visibility = View.VISIBLE
+
+        })
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        authenticationViewModel.getConnectedUser().observe(this, Observer {
+            if (it != null) {
+                binding.migrateView.visibility = View.GONE
+            }
+
         })
     }
 }
