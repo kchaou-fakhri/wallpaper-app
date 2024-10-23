@@ -88,6 +88,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth'
 
     implementation 'androidx.work:work-runtime:2.7.0'
+    // Swiper refresh
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+
 
 
 }

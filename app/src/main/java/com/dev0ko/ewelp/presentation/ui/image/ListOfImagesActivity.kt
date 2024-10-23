@@ -9,7 +9,9 @@ import android.view.View
 import android.view.WindowManager
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.NestedScrollView
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.dev0ko.authlib.AuthLibraryActivity
 import com.dev0ko.authlib.presentation.viewmodel.AuthenticationViewModel
@@ -27,7 +29,8 @@ class ListOfImagesActivity : AppCompatActivity() {
     private val photoVM: PhotoViewModel by viewModels()
     private lateinit var imagesAdapter: ImagesAdapter
     private var images: ArrayList<Photo> = arrayListOf()
-
+    var isAuthenticated = false
+    private lateinit var category : String
     private val authenticationViewModel: AuthenticationViewModel by viewModels()
 
     // Current page for pagination
@@ -59,7 +62,7 @@ class ListOfImagesActivity : AppCompatActivity() {
             }
         }
         // Get the category from the intent extras
-        val category = intent.extras?.getString(Constants.CATEGORY)
+         category = intent.extras?.getString(Constants.CATEGORY)!!
 
         // Initialize the adapter with the current context and image list
         imagesAdapter = ImagesAdapter(this, images)
@@ -76,24 +79,26 @@ class ListOfImagesActivity : AppCompatActivity() {
         getData(category, page)
 
         // Set up a scroll listener to load more data when scrolled to the bottom
-//        binding.images.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-//            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-//                super.onScrolled(recyclerView, dx, dy)
-//                // Check if RecyclerView cannot scroll further down
-//                if (!recyclerView.canScrollVertically(1)) {
-//                    page++ // Increment page number for pagination
-//                    getData(category, page) // Load more data
-//                }
-//            }
-//        })
+
+
+        binding.parent.setOnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+            val lastChild = (v as NestedScrollView).getChildAt(v.childCount - 1)
+            if (lastChild != null) {
+                if (scrollY >= (lastChild.measuredHeight - v.measuredHeight) && scrollY > oldScrollY && isAuthenticated) {
+                    page++ // Increment page number for pagination
+                    getData(category, page) // Load more data
+                }
+            }
+        }
 
 
         authenticationViewModel.getConnectedUser().observe(this, Observer {
             if (it != null) {
 
                 binding.migrateView.visibility = View.GONE
+                isAuthenticated = true
             } else {
-
+                isAuthenticated = false
                 Handler(Looper.getMainLooper()).postDelayed({
                     binding.migrateView.visibility = View.VISIBLE
                 }, 1000)
@@ -121,6 +126,9 @@ class ListOfImagesActivity : AppCompatActivity() {
         authenticationViewModel.getConnectedUser().observe(this, Observer {
             if (it != null) {
                 binding.migrateView.visibility = View.GONE
+                page++ // Increment page number for pagination
+                getData(category, page) // Load more data
+                isAuthenticated = true
             }
 
         })
