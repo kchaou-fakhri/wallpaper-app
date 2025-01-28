@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:layout_gravity="center"
+    android:layout_margin="10dp"
+    android:elevation="2dp"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="5dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+      >
+
+        <com.dev0ko.ewelp.utils.ScaleImageView
+            android:id="@+id/image"
+            android:alpha="0.8"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="16dp" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+
+        android:id="@+id/category_name"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Nature"
+        android:background="#12333333"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:fontFamily="@font/edu_guides_bold"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/image"
+        app:layout_constraintStart_toStartOf="@+id/image"
+        app:layout_constraintTop_toTopOf="@+id/image" />
+
+</androidx.cardview.widget.CardView>

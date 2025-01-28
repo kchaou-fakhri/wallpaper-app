@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="txt_login">Login</string>
+    <string name="txt_register">Register</string>
+    <string name="txt_reset">Reset</string>
+    <string name="txt_please_enter_valid_email">Please enter a valid email address</string>
+    <string name="txt_email_required">Email is required</string>
+    <string name="txt_password_required">Password is required</string>
+    <string name="txt_password_more_then6">Password must be at least 6 characters</string>
+    <string name="dialog_invalid_login">Login or password is invalid, Please try again</string>
+    <string name="dialog_invalid_register">An internal error occurred during your request, Please go back and try again</string>
+
+    <string name="dialog_msg_opes">Sorry</string>
+    <string name="dialog_msg_check_email">Verify your email</string>
+    <string name="dialog_msg_check_email_deescription">Please verify your email address by clicking the link sent to </string>
+
+
+    <string name="txt_ok">Ok</string>
+    <string name="txt_login_into_account">Login into your account</string>
+    <string name="txt_create_account">Create an account</string>
+    <string name="txt_reset_passowrd">Reset your password</string>
+
+    <string name="txt_wlcm_back">Welcome back! Please enter your credentials</string>
+    <string name="txt_wlcm">Welcome! Create an account here</string>
+    <string name="txt_email">Email</string>
+    <string name="txt_username">Username</string>
+
+    <string name="txt_enter_email">Enter your email</string>
+    <string name="txt_enter_name">Enter your name</string>
+
+    <string name="txt_password">Password</string>
+    <string name="txt_enter_password">Enter your password</string>
+    <string name="txt_forget_password">Forget password</string>
+    <string name="txt_sign_up">Don’t Have An Account? Sign Up</string>
+    <string name="txt_sign_in">You already have an account? Sign in</string>
+    <string name="txt_or">- or -</string>
+    <string name="txt_google">Google</string>
+    <string name="txt_facebook">Facebook</string>
+    <string name="dialog_user_exists">User already exists</string>
+
+    <string name="web_client_id" translatable="false">973088131159-vcsjtbv98ilbkb4qtqmrpdlcvqudd0qa.apps.googleusercontent.com</string>
+</resources>

@@ -13,3 +13,12 @@ import android.content.res.Configuration
  */
 fun checkOrientation(context: Context): String =
      if ((context.resources.configuration.screenLayout and Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_LARGE) Constants.LANDSCAPE else Constants.PORTRAIT
+
+/**
+ * Checks the type of the device if a tablet.
+ *
+ * @param context The context from which to access the device's resources and configuration.
+ * @return A Boolean representing the type of the device
+ */
+fun isTablet(context: Context): Boolean =
+      ((context.resources.configuration.screenLayout and Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_LARGE)

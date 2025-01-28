@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="txt_login">Connexion</string>
+    <string name="txt_create_account">Créer un compte</string>
+    <string name="txt_reset">Réinitialisation</string>
+
+    <string name="txt_please_enter_valid_email">Veuillez saisir une adresse électronique valide</string>
+    <string name="txt_email_required">L\'email est requise</string>
+    <string name="txt_password_required">Le mot de passe est requis</string>
+    <string name="txt_password_more_then6">Le mot de passe doit comporter au moins 6 caractères</string>
+    <string name="dialog_invalid_login">Le login ou le mot de passe n\'est pas valide, veuillez réessayer.</string>
+    <string name="dialog_invalid_register">Une erreur interne s\'est produite lors de votre demande, veuillez revenir en arrière et réessayer.</string>
+    <string name="txt_reset_passowrd">Réinitialiser votre mot de passe</string>
+
+    <string name="dialog_msg_opes">Désolé</string>
+    <string name="dialog_msg_check_email">Vérifiez votre adresse e-mail</string>
+    <string name="dialog_msg_check_email_deescription">Veuillez vérifier votre adresse e-mail en cliquant sur le lien envoyé à</string>
+
+    <string name="txt_ok">D\'accord</string>
+
+    <string name="txt_login_into_account">Connectez-vous à votre compte</string>
+    <string name="txt_wlcm_back">Bienvenue ! Veuillez entrer vos données d\'identification</string>
+    <string name="txt_email">Email</string>
+    <string name="txt_enter_email">Saisissez votre email</string>
+    <string name="txt_password">Mot de passe</string>
+    <string name="txt_enter_password">Entrez votre mot de passe</string>
+    <string name="txt_forget_password">Vous avez oublié votre mot de passe ?</string>
+    <string name="txt_sign_up">Vous n\'avez pas de compte ? S\'inscrire</string>
+    <string name="txt_sign_in">Vous avez déjà un compte ? S\'identifier</string>
+    <string name="txt_wlcm">Bienvenue ! Créer un compte ici</string>
+    <string name="txt_username">Nom d\'utilisateur</string>
+    <string name="txt_register">Registre</string>
+
+    <string name="txt_enter_name">Entrez votre nom</string>
+
+    <string name="txt_or">- ou -</string>
+    <string name="txt_google">Google</string>
+    <string name="txt_facebook">Facebook</string>
+    <string name="dialog_user_exists">L\'utilisateur existe déjà</string>
+
+
+</resources>
